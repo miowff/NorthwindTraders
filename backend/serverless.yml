@@ -1,0 +1,12 @@
+service: NorthwindTraders
+
+frameworkVersion: '3'
+	
+plugins:
+  - serverless-esbuild
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  profile: myawff
+  region: us-east-1
