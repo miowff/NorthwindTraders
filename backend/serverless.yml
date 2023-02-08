@@ -1,7 +1,7 @@
 service: NorthwindTraders
 
-frameworkVersion: '3'
-	
+frameworkVersion: "3"
+
 plugins:
   - serverless-esbuild
 
@@ -10,3 +10,23 @@ provider:
   runtime: nodejs14.x
   profile: myawff
   region: us-east-1
+  environment:
+    NORTHWIND_TRADERS_DB_USERNAME: ${ssm:NORTHWIND_TRADERS_USERNAME}
+    NORTHWIND_TRADERS_DB_PASSWORD: ${ssm:NORTHWIND_TRADERS_PASSWORD}
+    NORTHWIND_TRADERS_DB_ENDPOINT: ${ssm:NORTHWIND_TRADERS_DB_ENDPOINT}
+    NORTHWIND_TRADERS_DB_PORT: ${ssm:NORTHWIND_TRADERS_DB_PORT}
+    NORTHWIND_TRADERS_DB_NAME: ${ssm:NORTHWIND_TRADERS_DB_NAME}
+
+resources:
+  Resources:
+    NorthwindTradersDB:
+      Type: AWS::RDS::DBInstance
+      Properties:
+        Engine: MySQL
+        DBName: NorthwindTradersDB
+        DBInstanceClass: db.t3.micro
+        MasterUsername: ${ssm:NORTHWIND_TRADERS_USERNAME}
+        MasterUserPassword: ${ssm:NORTHWIND_TRADERS_PASSWORD}
+        AllocatedStorage: 5
+        BackupRetentionPeriod: 0
+        PubliclyAccessible: true

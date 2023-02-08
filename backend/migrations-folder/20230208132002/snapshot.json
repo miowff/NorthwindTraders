@@ -1,0 +1,768 @@
+{
+  "version": "4",
+  "dialect": "mysql",
+  "id": "22c0d42d-db00-45b0-9192-8587a0686dc9",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "Categories": {
+      "name": "Categories",
+      "columns": {
+        "CategoryID": {
+          "name": "CategoryID",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "CategoryName": {
+          "name": "CategoryName",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Description": {
+          "name": "Description",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "Customers": {
+      "name": "Customers",
+      "columns": {
+        "CustomerID": {
+          "name": "CustomerID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "CompanyName": {
+          "name": "CompanyName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ContactName": {
+          "name": "ContactName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ContactTitle": {
+          "name": "ContactTitle",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Address": {
+          "name": "Address",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "City": {
+          "name": "City",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Region": {
+          "name": "Region",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "PostalCode": {
+          "name": "PostalCode",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Country": {
+          "name": "Country",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Phone": {
+          "name": "Phone",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Fax": {
+          "name": "Fax",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "Employees": {
+      "name": "Employees",
+      "columns": {
+        "EmployeeID": {
+          "name": "EmployeeID",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "LastName": {
+          "name": "LastName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "FirstName": {
+          "name": "FirstName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Title": {
+          "name": "Title",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "TitleOfCourtesy": {
+          "name": "TitleOfCourtesy",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "BirthDate": {
+          "name": "BirthDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "HireDate": {
+          "name": "HireDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Address": {
+          "name": "Address",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "City": {
+          "name": "City",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Region": {
+          "name": "Region",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "PostalCode": {
+          "name": "PostalCode",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Country": {
+          "name": "Country",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "HomePhone": {
+          "name": "HomePhone",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Extension": {
+          "name": "Extension",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Notes": {
+          "name": "Notes",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ReportsTo": {
+          "name": "ReportsTo",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "EmployeeTerritories": {
+      "name": "EmployeeTerritories",
+      "columns": {
+        "EmployeeID": {
+          "name": "EmployeeID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TerritoryID": {
+          "name": "TerritoryID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "EmployeeTerritories_EmployeeID_Employees_EmployeeID_fk": {
+          "name": "EmployeeTerritories_EmployeeID_Employees_EmployeeID_fk",
+          "tableFrom": "EmployeeTerritories",
+          "tableTo": "Employees",
+          "columnsFrom": [
+            "EmployeeID"
+          ],
+          "columnsTo": [
+            "EmployeeID"
+          ]
+        },
+        "EmployeeTerritories_TerritoryID_Territories_TerritoryID_fk": {
+          "name": "EmployeeTerritories_TerritoryID_Territories_TerritoryID_fk",
+          "tableFrom": "EmployeeTerritories",
+          "tableTo": "Territories",
+          "columnsFrom": [
+            "TerritoryID"
+          ],
+          "columnsTo": [
+            "TerritoryID"
+          ]
+        }
+      }
+    },
+    "OrderDetails": {
+      "name": "OrderDetails",
+      "columns": {
+        "OrderID": {
+          "name": "OrderID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ProductID": {
+          "name": "ProductID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "UnitPrice": {
+          "name": "UnitPrice",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Quantity": {
+          "name": "Quantity",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Discount": {
+          "name": "Discount",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "OrderDetails_OrderID_Orders_OrderID_fk": {
+          "name": "OrderDetails_OrderID_Orders_OrderID_fk",
+          "tableFrom": "OrderDetails",
+          "tableTo": "Orders",
+          "columnsFrom": [
+            "OrderID"
+          ],
+          "columnsTo": [
+            "OrderID"
+          ]
+        },
+        "OrderDetails_ProductID_Products_ProductID_fk": {
+          "name": "OrderDetails_ProductID_Products_ProductID_fk",
+          "tableFrom": "OrderDetails",
+          "tableTo": "Products",
+          "columnsFrom": [
+            "ProductID"
+          ],
+          "columnsTo": [
+            "ProductID"
+          ]
+        }
+      }
+    },
+    "Orders": {
+      "name": "Orders",
+      "columns": {
+        "OrderID": {
+          "name": "OrderID",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "CustomerID": {
+          "name": "CustomerID",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "EmployeeID": {
+          "name": "EmployeeID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "OrderDate": {
+          "name": "OrderDate",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "RequiredDate": {
+          "name": "RequiredDate",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ShippedDate": {
+          "name": "ShippedDate",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ShipVia": {
+          "name": "ShipVia",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Freight": {
+          "name": "Freight",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ShipName": {
+          "name": "ShipName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ShipAddress": {
+          "name": "ShipAddress",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ShipCity": {
+          "name": "ShipCity",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ShipRegion": {
+          "name": "ShipRegion",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ShipPostalCode": {
+          "name": "ShipPostalCode",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ShipCountry": {
+          "name": "ShipCountry",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Orders_CustomerID_Customers_CustomerID_fk": {
+          "name": "Orders_CustomerID_Customers_CustomerID_fk",
+          "tableFrom": "Orders",
+          "tableTo": "Customers",
+          "columnsFrom": [
+            "CustomerID"
+          ],
+          "columnsTo": [
+            "CustomerID"
+          ]
+        },
+        "Orders_EmployeeID_Employees_EmployeeID_fk": {
+          "name": "Orders_EmployeeID_Employees_EmployeeID_fk",
+          "tableFrom": "Orders",
+          "tableTo": "Employees",
+          "columnsFrom": [
+            "EmployeeID"
+          ],
+          "columnsTo": [
+            "EmployeeID"
+          ]
+        },
+        "Orders_ShipVia_Shippers_ShipperID_fk": {
+          "name": "Orders_ShipVia_Shippers_ShipperID_fk",
+          "tableFrom": "Orders",
+          "tableTo": "Shippers",
+          "columnsFrom": [
+            "ShipVia"
+          ],
+          "columnsTo": [
+            "ShipperID"
+          ]
+        }
+      }
+    },
+    "Products": {
+      "name": "Products",
+      "columns": {
+        "ProductID": {
+          "name": "ProductID",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ProductName": {
+          "name": "ProductName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "QuantityPerUnit": {
+          "name": "QuantityPerUnit",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "UnitPrice": {
+          "name": "UnitPrice",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "UnitsInStock": {
+          "name": "UnitsInStock",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "UnitsOnOrder": {
+          "name": "UnitsOnOrder",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ReorderLevel": {
+          "name": "ReorderLevel",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Discontinued": {
+          "name": "Discontinued",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "SupplierID": {
+          "name": "SupplierID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "CategoryID": {
+          "name": "CategoryID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Products_SupplierID_Suppliers_SupplierID_fk": {
+          "name": "Products_SupplierID_Suppliers_SupplierID_fk",
+          "tableFrom": "Products",
+          "tableTo": "Suppliers",
+          "columnsFrom": [
+            "SupplierID"
+          ],
+          "columnsTo": [
+            "SupplierID"
+          ]
+        },
+        "Products_CategoryID_Categories_CategoryID_fk": {
+          "name": "Products_CategoryID_Categories_CategoryID_fk",
+          "tableFrom": "Products",
+          "tableTo": "Categories",
+          "columnsFrom": [
+            "CategoryID"
+          ],
+          "columnsTo": [
+            "CategoryID"
+          ]
+        }
+      }
+    },
+    "Regions": {
+      "name": "Regions",
+      "columns": {
+        "RegionID": {
+          "name": "RegionID",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "RegionDescription": {
+          "name": "RegionDescription",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "Shippers": {
+      "name": "Shippers",
+      "columns": {
+        "ShipperID": {
+          "name": "ShipperID",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "CompanyName": {
+          "name": "CompanyName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Phone": {
+          "name": "Phone",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "Suppliers": {
+      "name": "Suppliers",
+      "columns": {
+        "SupplierID": {
+          "name": "SupplierID",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "CompanyName": {
+          "name": "CompanyName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ContactName": {
+          "name": "ContactName",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ContactTitle": {
+          "name": "ContactTitle",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Address": {
+          "name": "Address",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "City": {
+          "name": "City",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Region": {
+          "name": "Region",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "PostalCode": {
+          "name": "PostalCode",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Country": {
+          "name": "Country",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Phone": {
+          "name": "Phone",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Fax": {
+          "name": "Fax",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "HomePage": {
+          "name": "HomePage",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "Territories": {
+      "name": "Territories",
+      "columns": {
+        "TerritoryID": {
+          "name": "TerritoryID",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TerritoryDescription": {
+          "name": "TerritoryDescription",
+          "type": "varchar(60)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "RegionID": {
+          "name": "RegionID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Territories_RegionID_Regions_RegionID_fk": {
+          "name": "Territories_RegionID_Regions_RegionID_fk",
+          "tableFrom": "Territories",
+          "tableTo": "Regions",
+          "columnsFrom": [
+            "RegionID"
+          ],
+          "columnsTo": [
+            "RegionID"
+          ]
+        }
+      }
+    }
+  },
+  "schemas": {}
+}

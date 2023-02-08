@@ -2,7 +2,6 @@
   "name": "serverles",
   "version": "1.0.0",
   "description": "Serverless aws-nodejs-typescript template",
-  "main": "serverless.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +16,7 @@
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",
     "@types/aws-lambda": "^8.10.108",
+    "@types/mysql": "^2.15.21",
     "@types/node": "^14.14.25",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
