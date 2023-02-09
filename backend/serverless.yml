@@ -17,6 +17,7 @@ provider:
     NORTHWIND_TRADERS_DB_PORT: ${ssm:NORTHWIND_TRADERS_DB_PORT}
     NORTHWIND_TRADERS_DB_NAME: ${ssm:NORTHWIND_TRADERS_DB_NAME}
 
+
 resources:
   Resources:
     NorthwindTradersDB:

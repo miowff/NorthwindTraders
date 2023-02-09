@@ -1,0 +1,24 @@
+import { InferModel } from "drizzle-orm/mysql-core";
+import { regions } from "./schema/regions";
+import { categories } from "./schema/categories";
+import { customers } from "./schema/customers";
+import { employees } from "./schema/employees";
+import { employeeTerritories } from "./schema/employeeTerritories";
+import { orderDetails } from "./schema/orderDetail";
+import { orders } from "./schema/orders";
+import { products } from "./schema/products";
+import { shippers } from "./schema/shippers";
+import { suppliers } from "./schema/suppliers";
+import { territories } from "./schema/territories";
+
+export type Region = InferModel<typeof regions>;
+export type Category = InferModel<typeof categories>;
+export type Customer = InferModel<typeof customers>;
+export type Employee = InferModel<typeof employees>;
+export type EmployeeTerritory = InferModel<typeof employeeTerritories>;
+export type OrderDetails = InferModel<typeof orderDetails>;
+export type Order = InferModel<typeof orders>;
+export type Product = InferModel<typeof products>;
+export type Shipper = InferModel<typeof shippers>;
+export type Supplier = InferModel<typeof suppliers>;
+export type Territory = InferModel<typeof territories>;
