@@ -1,6 +1,5 @@
 import {
   mysqlTable,
-  serial,
   datetime,
   int,
   float,
@@ -12,7 +11,7 @@ import { shippers } from "./shippers";
 
 export const orders = mysqlTable("Orders", {
   orderId: int("OrderID").primaryKey().notNull(),
-  customerId: serial("CustomerID").references(() => customers.customerId),
+  customerId: varchar("CustomerID",{length:256}).references(() => customers.customerId),
   employeeId: int("EmployeeID").references(() => employees.employeeId),
   orderDate: datetime("OrderDate"),
   requiredDate: datetime("RequiredDate"),

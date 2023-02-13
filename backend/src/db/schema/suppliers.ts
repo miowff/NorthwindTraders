@@ -12,5 +12,5 @@ export const suppliers = mysqlTable("Suppliers", {
   country: varchar("Country", { length: 60 }),
   phone: varchar("Phone", { length: 60 }),
   fax: varchar("Fax", { length: 60 }),
-  homePage: varchar("HomePage", { length: 60 }),
+  homePage: varchar("HomePage", { length: 256 }),
 });

@@ -10,4 +10,4 @@ const poolConnection = mysql.createPool({
   port: parseInt(process.env.NORTHWIND_TRADERS_DB_PORT),
 });
 
-export const db = drizzle(poolConnection);
+export const database = drizzle(poolConnection);

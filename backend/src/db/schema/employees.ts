@@ -1,4 +1,4 @@
-import { mysqlTable, date, int, varchar } from "drizzle-orm/mysql-core";
+import { mysqlTable, date, int, varchar, foreignKey } from "drizzle-orm/mysql-core";
 
 export const employees = mysqlTable("Employees", {
   employeeId: int("EmployeeID").primaryKey().notNull(),
@@ -15,6 +15,6 @@ export const employees = mysqlTable("Employees", {
   country: varchar("Country", { length: 60 }),
   homePhone: varchar("HomePhone", { length: 60 }),
   extension: varchar("Extension", { length: 60 }),
-  notes: varchar("Notes", { length: 60 }),
-  reportsTo: varchar("ReportsTo", { length: 60 }),
+  notes: varchar("Notes", { length: 500 }),
+  reportsTo: int("ReportsTo"),
 });
