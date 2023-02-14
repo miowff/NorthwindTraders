@@ -74,6 +74,20 @@ functions:
           path: product
           method: get
           cors: true
+  getOrderById:
+    handler: src/lambdas/orders/getOrderById.handler
+    events:
+      - http:
+          path: order
+          method: get
+          cors: true
+  getEmployeeById:
+    handler: src/lambdas/employees/getEmployeeById.handler
+    events:
+      - http:
+          path: employee
+          method: get
+          cors: true
   searchObjects:
     handler: src/lambdas/searchObjects.handler
     events:

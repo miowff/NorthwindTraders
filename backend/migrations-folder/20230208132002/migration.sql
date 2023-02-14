@@ -19,7 +19,7 @@ CREATE TABLE `Customers` (
 );
 
 CREATE TABLE `Employees` (
-	`EmployeeID` int PRIMARY KEY NOT NULL,
+	`EmployeeID` int PRIMARY KEY ,
 	`LastName` varchar(60) NOT NULL,
 	`FirstName` varchar(60) NOT NULL,
 	`Title` varchar(60),
@@ -33,7 +33,7 @@ CREATE TABLE `Employees` (
 	`Country` varchar(60),
 	`HomePhone` varchar(60),
 	`Extension` varchar(60),
-	`Notes` varchar(60),
+	`Notes` varchar(500),
 	`ReportsTo` varchar(60)
 );
 

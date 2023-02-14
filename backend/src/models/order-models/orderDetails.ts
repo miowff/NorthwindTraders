@@ -6,7 +6,7 @@ export class OrderDetails extends OrderModel
     customerId:string;
     totalDiscount:number;
     shipVia:string;
-    freight:string;
+    freight:number;
     orderDate:Date;
     requiredDate:Date;
     shipRegion:string;

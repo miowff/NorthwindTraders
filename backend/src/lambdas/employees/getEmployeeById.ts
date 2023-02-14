@@ -8,8 +8,9 @@ export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const employees = await employeesService.getAllAsync();
-    return { statusCode: 200, body: JSON.stringify(employees) };
+    const id = +event.queryStringParameters["id"];
+    const employee = await employeesService.getByIdAsync(id);
+    return { statusCode: 200, body: JSON.stringify(employee) };
   } catch (err) {
     return { statusCode: 400, body: JSON.stringify(`Bad request: ${err}`) };
   }

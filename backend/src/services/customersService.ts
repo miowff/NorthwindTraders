@@ -4,6 +4,8 @@ import { CustomerModel } from "src/models/cusomer-models/customer";
 import { ResponceDto } from "src/models/responce";
 import { getByColumnAsync } from "src/db/baseOperations";
 import { like } from "drizzle-orm/expressions";
+import { ServicesError } from "src/errors/servicesError";
+import { OperationsTypes } from "src/operationTypes";
 
 class CustomersService {
   getAllAsync = async (): Promise<ResponceDto> => {
@@ -19,16 +21,19 @@ class CustomersService {
       });
     return new ResponceDto(allCustomers, {
       time: new Date(),
-      operation: "SELECT",
+      operation: OperationsTypes.SELECT,
       resultsCount: allCustomers.length,
       operationDescription: "SELECT * FROM Customers",
     });
   };
   getByIdAsync = async (id: string): Promise<ResponceDto> => {
     const customer = await getByColumnAsync("customerId", customers, id);
+    if (!customer[0]) {
+      throw ServicesError.CustomerNotFound(id);
+    }
     return new ResponceDto(customer, {
       time: new Date(),
-      operation: "SELECT WHERE",
+      operation: OperationsTypes.SELECT_WHERE,
       resultsCount: 1,
       operationDescription: `SELECT * FROM Customers WHERE CustomerID = ${id}`,
     });
@@ -46,7 +51,7 @@ class CustomersService {
 
     return new ResponceDto(suitableCustomers, {
       time: new Date(),
-      operation: "SELECT WHERE",
+      operation: OperationsTypes.SELECT_WHERE,
       resultsCount: 1,
       operationDescription: `SELECT * FROM Customers WHERE Customers.CompanyName  LIKE %${searchString}%`,
     });

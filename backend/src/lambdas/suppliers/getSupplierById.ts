@@ -7,10 +7,11 @@ import suppliersService from "src/services/suppliersService";
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  const id = +event.queryStringParameters["id"];
-  if (!id) {
-    return { statusCode: 400, body: "Bad request! id query param is null." };
+  try {
+    const id = +event.queryStringParameters["id"];
+    const supllier = await suppliersService.getByIdAsync(id);
+    return { statusCode: 200, body: JSON.stringify(supllier) };
+  } catch (err) {
+    return { statusCode: 400, body: JSON.stringify(`Bad request: ${err}`) };
   }
-  const supllier = await suppliersService.getByIdAsync(id);
-  return { statusCode: 200, body: JSON.stringify(supllier) };
 };

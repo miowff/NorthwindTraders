@@ -2,10 +2,10 @@ export class OrderModel
 {
     id:number;
     totalPrice:number;
-    products:number;
-    quantity:number;
-    shipped:Date;
+    totalProducts:number;
+    totalQuantity:number;
+    shippedDate:Date;
     shipName:string;
-    city:string;
-    country:string;
+    shipCity:string;
+    shipCountry:string;
 }

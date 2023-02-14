@@ -7,10 +7,14 @@ import customersService from "src/services/customersService";
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  const id = event.queryStringParameters["id"];
-  if (!id) {
-    return { statusCode: 400, body: "Bad request! id query param is null." };
+  try {
+    const id = event.queryStringParameters["id"];
+    if (!id) {
+      return { statusCode: 400, body: "Bad request! id query param is null." };
+    }
+    const customer = await customersService.getByIdAsync(id);
+    return { statusCode: 200, body: JSON.stringify(customer) };
+  } catch (err) {
+    return { statusCode: 400, body: JSON.stringify(`Bad request: ${err}`) };
   }
-  const customer = await customersService.getByIdAsync(id);
-  return { statusCode: 200, body: JSON.stringify(customer) };
 };

@@ -1,0 +1,5 @@
+export enum OperationsTypes {
+  SELECT = "SELECT",
+  SELECT_WHERE = "SELECT WHERE",
+  SELECT_LEFT_JOIN = "SELECT LEFT JOIN",
+}

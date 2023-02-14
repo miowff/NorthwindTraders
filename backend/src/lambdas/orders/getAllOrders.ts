@@ -7,6 +7,10 @@ import ordersService from "src/services/ordersService";
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  const orders = await ordersService.getAllAsync();
-  return { statusCode: 200, body: JSON.stringify(orders) };
+  try {
+    const orders = await ordersService.getAllAsync();
+    return { statusCode: 200, body: JSON.stringify(orders) };
+  } catch (err) {
+    return { statusCode: 400, body: JSON.stringify(`Bad request: ${err}`) };
+  }
 };

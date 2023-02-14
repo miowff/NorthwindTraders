@@ -2,9 +2,11 @@ import { eq, like } from "drizzle-orm/expressions";
 import { database } from "src/db/dbConnection";
 import { products } from "src/db/schema/products";
 import { suppliers } from "src/db/schema/suppliers";
+import { ServicesError } from "src/errors/servicesError";
 import { ProductModel } from "src/models/product-models/product";
 import { ProductDetails } from "src/models/product-models/productDetails";
 import { ResponceDto } from "src/models/responce";
+import { OperationsTypes } from "src/operationTypes";
 
 class ProductsService {
   getAllAsync = async (): Promise<ResponceDto> => {
@@ -18,7 +20,7 @@ class ProductsService {
     });
     return new ResponceDto(allProducs, {
       time: new Date(),
-      operation: "SELECT",
+      operation: OperationsTypes.SELECT,
       resultsCount: allProducs.length,
       operationDescription: "SELECT * FROM Products",
     });
@@ -40,9 +42,12 @@ class ProductsService {
         reorderLevel: products.reorderLevel,
         discontinued: products.discontinued,
       });
+    if (!product[0]) {
+      throw ServicesError.ProductNotFound(id);
+    }
     return new ResponceDto(product[0], {
       time: new Date(),
-      operation: "SELECT LEFT JOIN",
+      operation: OperationsTypes.SELECT_LEFT_JOIN,
       resultsCount: 1,
       operationDescription: `
       SELECT Products.ProductName as name, Products.QuantityPerUnit as quantityPerUnit
@@ -64,7 +69,7 @@ class ProductsService {
       });
     return new ResponceDto(suitableProducts, {
       time: new Date(),
-      operation: "SELECT WHERE",
+      operation: OperationsTypes.SELECT_WHERE,
       resultsCount: 1,
       operationDescription: `SELECT * FROM PRODUCT WHERE Product.ProductName LIKE %${searchString}%`,
     });
