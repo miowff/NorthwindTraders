@@ -1,7 +1,7 @@
 {
   "version": "4",
   "dialect": "mysql",
-  "id": "f9ac51f8-83ef-4893-9f50-8f94986d2533",
+  "id": "99673745-ec58-4c91-9656-da6993c17af4",
   "prevId": "22c0d42d-db00-45b0-9192-8587a0686dc9",
   "tables": {
     "Categories": {
@@ -233,19 +233,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "Employees_ReportsTo_Employees_EmployeeID_fk": {
-          "name": "Employees_ReportsTo_Employees_EmployeeID_fk",
-          "tableFrom": "Employees",
-          "tableTo": "Employees",
-          "columnsFrom": [
-            "ReportsTo"
-          ],
-          "columnsTo": [
-            "EmployeeID"
-          ]
-        }
-      }
+      "foreignKeys": {}
     },
     "EmployeeTerritories": {
       "name": "EmployeeTerritories",
@@ -431,13 +419,6 @@
         },
         "ShipCity": {
           "name": "ShipCity",
-          "type": "varchar(60)",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "ShipRegion": {
-          "name": "ShipRegion",
           "type": "varchar(60)",
           "primaryKey": false,
           "notNull": false,
@@ -684,13 +665,6 @@
         },
         "City": {
           "name": "City",
-          "type": "varchar(60)",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "Region": {
-          "name": "Region",
           "type": "varchar(60)",
           "primaryKey": false,
           "notNull": false,

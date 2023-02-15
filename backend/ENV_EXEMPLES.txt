@@ -1,0 +1,5 @@
+NORTHWIND_TRADERS_DB_USERNAME:Your USername
+NORTHWIND_TRADERS_DB_PASSWORD: any strong password
+NORTHWIND_TRADERS_DB_ENDPOINT: northwindtraders-dev-northwindtradersdb-********.********.us-east-1.rds.amazonaws.com
+NORTHWIND_TRADERS_DB_PORT: 3306
+NORTHWIND_TRADERS_DB_NAME: NorthwindTradersDB

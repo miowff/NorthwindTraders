@@ -7,7 +7,6 @@ export const suppliers = mysqlTable("Suppliers", {
   contactTitle: varchar("ContactTitle", { length: 60 }),
   address: varchar("Address", { length: 60 }),
   city: varchar("City", { length: 60 }),
-  region: varchar("Region", { length: 60 }),
   postalCode: varchar("PostalCode", { length: 60 }),
   country: varchar("Country", { length: 60 }),
   phone: varchar("Phone", { length: 60 }),

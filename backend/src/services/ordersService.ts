@@ -47,7 +47,6 @@ class OrdersService {
         requiredDate: orders.requiredDate,
         shippedDate: orders.shippedDate,
         shipCity: orders.shipCity,
-        shipRegion: orders.shipRegion,
         shipPostalCode: orders.shipPostalCode,
         shipCountry: orders.shipCountry,
       });
@@ -81,7 +80,6 @@ class OrdersService {
       requiredDate: order[0].requiredDate,
       shippedDate: order[0].shippedDate,
       shipCity: order[0].shipCity,
-      shipRegion: order[0].shipRegion,
       shipPostalCode: order[0].shipPostalCode,
       shipCountry: order[0].shipCountry,
       productsInOrder: details,

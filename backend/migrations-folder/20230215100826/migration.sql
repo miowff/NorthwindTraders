@@ -1,0 +1,2 @@
+ALTER TABLE Orders DROP COLUMN `ShipRegion`;
+ALTER TABLE Suppliers DROP COLUMN `Region`;

@@ -21,7 +21,6 @@ export const orders = mysqlTable("Orders", {
   shipName: varchar("ShipName", { length: 60 }),
   shipAddress: varchar("ShipAddress", { length: 60 }),
   shipCity: varchar("ShipCity", { length: 60 }),
-  shipRegion: varchar("ShipRegion", { length: 60 }),
   shipPostalCode: varchar("ShipPostalCode", { length: 60 }),
   shipCountry: varchar("ShipCountry", { length: 60 }),
 });

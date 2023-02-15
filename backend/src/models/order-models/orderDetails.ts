@@ -9,7 +9,6 @@ export class OrderDetails extends OrderModel
     freight:number;
     orderDate:Date;
     requiredDate:Date;
-    shipRegion:string;
     shipPostalCode:string;
     productsInOrder:ProductInOrder[]
 }

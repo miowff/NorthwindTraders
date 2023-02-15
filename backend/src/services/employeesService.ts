@@ -61,7 +61,7 @@ class EmployeesService {
       time: new Date(),
       operation: OperationsTypes.SELECT,
       resultsCount: 1,
-      operationDescription: "SELECT * FROM Employees",
+      operationDescription: `SELECT * FROM Employees WHERE Employees.EmployeeID = ${id}`,
     });
   };
 }
