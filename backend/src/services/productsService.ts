@@ -1,51 +1,29 @@
-import { eq, like } from "drizzle-orm/expressions";
-import { database } from "src/db/dbConnection";
-import { products } from "src/db/schema/products";
-import { suppliers } from "src/db/schema/suppliers";
+import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { ProductModel } from "src/models/product-models/product";
 import { ProductDetails } from "src/models/product-models/productDetails";
-import { ResponceDto } from "src/models/responce";
+import { ResponseDto } from "src/models/responce";
 import { OperationsTypes } from "src/operationTypes";
 
 class ProductsService {
-  getAllAsync = async (): Promise<ResponceDto> => {
-    const allProducs: ProductModel[] = await database.select(products).fields({
-      name: products.productName,
-      quantityPerUnit: products.quantityPerUnit,
-      price: products.unitPrice,
-      stock: products.unitsInStock,
-      orders: products.unitsOnOrder,
-      id: products.productId,
-    });
-    return new ResponceDto(allProducs, {
+  getAll = async (): Promise<ResponseDto> => {
+    const allProducs: ProductModel[] = await productsRepository.getAll();
+    return new ResponseDto(allProducs, {
       time: new Date(),
       operation: OperationsTypes.SELECT,
       resultsCount: allProducs.length,
       operationDescription: "SELECT * FROM Products",
     });
   };
-  getByIdAsync = async (id: number): Promise<ResponceDto> => {
-    const product: Array<ProductDetails> = await database
-      .select(products)
-      .leftJoin(suppliers, eq(suppliers.supplierId, products.supplierId))
-      .where(eq(products.productId, id))
-      .fields({
-        name: products.productName,
-        quantityPerUnit: products.quantityPerUnit,
-        price: products.unitPrice,
-        stock: products.unitsInStock,
-        orders: products.unitsOnOrder,
-        id: products.productId,
-        supplier: suppliers.companyName,
-        supplierId: suppliers.supplierId,
-        reorderLevel: products.reorderLevel,
-        discontinued: products.discontinued,
-      });
+  getById = async (id: number): Promise<ResponseDto> => {
+    const product = await productsRepository.getByColumn(
+      "productId",
+      id
+    );
     if (!product[0]) {
       throw ServicesError.ProductNotFound(id);
     }
-    return new ResponceDto(product[0], {
+    return new ResponseDto(product[0], {
       time: new Date(),
       operation: OperationsTypes.SELECT_LEFT_JOIN,
       resultsCount: 1,
@@ -57,20 +35,12 @@ class ProductsService {
       FROM Products LEFT JOIN Suppliers ON Products.SupplierID WHERE Products.ProductID = ${id}`,
     });
   };
-  searchProductAsync = async (searchString: string): Promise<ResponceDto> => {
-    const suitableProducts = await database
-      .select(products)
-      .where(like(products.productName, `%${searchString}%`))
-      .fields({
-        productName: products.productName,
-        quantityPerUnit: products.quantityPerUnit,
-        price: products.unitPrice,
-        stock: products.unitsInStock,
-      });
-    return new ResponceDto(suitableProducts, {
+  search = async (searchString: string): Promise<ResponseDto> => {
+    const suitableProducts = await productsRepository.find(searchString);
+    return new ResponseDto(suitableProducts, {
       time: new Date(),
       operation: OperationsTypes.SELECT_WHERE,
-      resultsCount: 1,
+      resultsCount: suitableProducts.length,
       operationDescription: `SELECT * FROM PRODUCT WHERE Product.ProductName LIKE %${searchString}%`,
     });
   };

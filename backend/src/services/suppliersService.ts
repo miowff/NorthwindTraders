@@ -1,36 +1,24 @@
-import { getByColumnAsync } from "src/db/baseOperations";
-import { database } from "src/db/dbConnection";
-import { suppliers } from "src/db/schema/suppliers";
+import suppliersRepository from "src/db/repositories/suppliersRepository";
 import { ServicesError } from "src/errors/servicesError";
-import { ResponceDto } from "src/models/responce";
-import { SupplierModel } from "src/models/supplier-models/supplier";
+import { ResponseDto } from "src/models/responce";
 import { OperationsTypes } from "src/operationTypes";
 
 class SuppliersService {
-  getAllAsync = async (): Promise<ResponceDto> => {
-    const allSuppliers: SupplierModel[] = await database
-      .select(suppliers)
-      .fields({
-        company: suppliers.companyName,
-        contact: suppliers.contactName,
-        title: suppliers.contactTitle,
-        city: suppliers.city,
-        country: suppliers.country,
-        id: suppliers.supplierId,
-      });
-    return new ResponceDto(allSuppliers, {
+  getAll = async (): Promise<ResponseDto> => {
+    const allSuppliers = await suppliersRepository.getAll();
+    return new ResponseDto(allSuppliers, {
       time: new Date(),
       operation: OperationsTypes.SELECT,
       resultsCount: allSuppliers.length,
       operationDescription: "SELECT * FROM Suppliers",
     });
   };
-  getByIdAsync = async (id: number): Promise<ResponceDto> => {
-    const supplier = await getByColumnAsync("supplierId", suppliers, id);
+  getById = async (id: number): Promise<ResponseDto> => {
+    const supplier = await suppliersRepository.getByColumn("supplierId", id);
     if (!supplier[0]) {
       throw ServicesError.SupplierNotFound(id);
     }
-    return new ResponceDto(supplier, {
+    return new ResponseDto(supplier[0], {
       time: new Date(),
       operation: OperationsTypes.SELECT_WHERE,
       resultsCount: 1,

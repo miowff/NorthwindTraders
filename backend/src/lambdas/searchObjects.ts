@@ -18,11 +18,11 @@ export const handler = async (
     }
     switch (type.toLowerCase()) {
       case "products": {
-        const result = await productsService.searchProductAsync(pattern);
+        const result = await productsService.search(pattern);
         return { statusCode: 200, body: JSON.stringify(result) };
       }
       case "customers": {
-        const result = await customersService.searchCustomerAsync(pattern);
+        const result = await customersService.find(pattern);
         return { statusCode: 200, body: JSON.stringify(result) };
       }
       default: {

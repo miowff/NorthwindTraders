@@ -18,6 +18,6 @@ export const searchByColumnValueAsync = async (
 ): Promise<MySqlSelect<AnyMySqlTable>> => {
   const result = await database
     .select(table)
-    .where(like(table[column], searchString));
+    .where(like(table[column], `%${searchString}%`));
   return result;
 };

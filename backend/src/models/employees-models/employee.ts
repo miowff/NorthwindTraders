@@ -5,6 +5,7 @@ export class EmployeeModel {
   phone: string;
   country: string;
   id: number;
+  reportsTo:number;
   constructor(
     name: string,
     title: string,

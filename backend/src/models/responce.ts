@@ -1,9 +1,9 @@
-import { ResponceDetails } from "./responceDetails";
+import { ResponseDetails } from "./responseDetails";
 
-export class ResponceDto {
+export class ResponseDto {
   data: any;
-  responceDetails: ResponceDetails;
-  constructor(data: any, details: ResponceDetails) {
+  responceDetails: ResponseDetails;
+  constructor(data: any, details: ResponseDetails) {
     this.data = data;
     this.responceDetails = details;
   }

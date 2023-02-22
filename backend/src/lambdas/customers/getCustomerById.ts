@@ -12,7 +12,7 @@ export const handler = async (
     if (!id) {
       return { statusCode: 400, body: "Bad request! id query param is null." };
     }
-    const customer = await customersService.getByIdAsync(id);
+    const customer = await customersService.getById(id);
     return { statusCode: 200, body: JSON.stringify(customer) };
   } catch (err) {
     return { statusCode: 400, body: JSON.stringify(`Bad request: ${err}`) };

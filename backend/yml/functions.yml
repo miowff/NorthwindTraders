@@ -75,3 +75,5 @@ searchObjects:
         path: search
         method: get
         cors: true
+
+
