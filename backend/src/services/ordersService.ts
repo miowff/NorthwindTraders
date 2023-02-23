@@ -7,7 +7,7 @@ import { OperationsTypes } from "src/operationTypes";
 
 class OrdersService {
   getAll = async (): Promise<ResponseDto> => {
-    const [result] = await ordersRepository.getAll();
+    const result = await ordersRepository.getAll();
     return new ResponseDto(result, {
       time: new Date(),
       operation: OperationsTypes.SELECT,

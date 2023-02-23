@@ -7,13 +7,22 @@ import { BaseRepository } from "./baseRepository";
 
 class OrdersRepositoy extends BaseRepository {
   getAll = async (): Promise<any> => {
-    const allOrders = await this.db.execute(
-      sql`SELECT SUM(${orderDetails.unitPrice} * ${orderDetails.quantity}) AS TotalPrice, 
-        SUM(${orderDetails.quantity}) AS Products, COUNT(${orderDetails.orderId}) AS TotalProducts, 
-        ${orders.orderId} as Id, ShippedDate as Shipped, ShipName,  ShipCity as City, ShipCountry as Country FROM ${orders},
-        ${orderDetails} WHERE ${orderDetails.orderId} = ${orders.orderId} GROUP BY ${orders.orderId} `
-    );
-    return allOrders;
+    const all = await this.db
+      .select(orders)
+      .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
+      .fields({
+        TotalPrice:
+          sql`SUM(${orderDetails.unitPrice} * ${orderDetails.quantity})`.as<number>(),
+        Products: sql`SUM(${orderDetails.quantity})`,
+        TotalProducts: sql`COUNT(${orderDetails.orderId})`.as<number>(),
+        Id: orders.orderId,
+        Shipped: orders.shippedDate,
+        ShipName: orders.shipName,
+        City: orders.shipCity,
+        Country: orders.shipCountry,
+      })
+      .groupBy(orderDetails.orderId);
+    return all;
   };
   override getByColumn = async (
     column: string,
