@@ -2,7 +2,7 @@ export interface ProductModel
 {
     name:string;
     quantityPerUnit:string;
-    price?:number;
+    price:number;
     stock:number;
     orders?:number;
     id:number;

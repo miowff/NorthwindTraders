@@ -6,7 +6,7 @@ import { BaseRepository } from "./baseRepository";
 
 export class EmployeesRepository extends BaseRepository {
   getAll = async (): Promise<EmployeeModel[]> => {
-    const allEmployees: EmployeeModel[] = await this.db
+    const allEmployees = await this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
         title: employees.title,
@@ -35,10 +35,11 @@ export class EmployeesRepository extends BaseRepository {
         extension: employees.extension,
         notes: employees.notes,
         reportsToId: employees.reportsTo,
+        id:employees.employeeId
       })
       .from(this.table)
       .where(eq(this.table[column], value));
-    return employee;
+    return employee[0];
   };
 }
 

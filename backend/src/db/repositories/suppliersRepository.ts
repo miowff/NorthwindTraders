@@ -6,9 +6,9 @@ class SuppliersRepository extends BaseRepository {
   getAll = async (): Promise<SupplierModel[]> => {
     const allSuppliers: SupplierModel[] = await this.db
       .select({
-        company: suppliers.companyName,
-        contact: suppliers.contactName,
-        title: suppliers.contactTitle,
+        companyName: suppliers.companyName,
+        contactName: suppliers.contactName,
+        constactTitle: suppliers.contactTitle,
         city: suppliers.city,
         country: suppliers.country,
         id: suppliers.supplierId,

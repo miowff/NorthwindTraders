@@ -10,7 +10,7 @@ class CustomersService {
       time: new Date(),
       operation: OperationsTypes.SELECT,
       resultsCount: allCustomers.length,
-      operationDescription: "SELECT * FROM Customers",
+      operationDescription: "select * from Customers",
     });
   };
   getById = async (id: string): Promise<ResponseDto> => {
