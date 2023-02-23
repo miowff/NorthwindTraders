@@ -5,7 +5,7 @@ import { BaseRepository } from "./baseRepository";
 
 class CustomersRepository extends BaseRepository {
   getAll = async (): Promise<CustomerModel[]> => {
-    const query = this.db
+    const allCustomers = this.db
       .select({
         company: customers.companyName,
         contact: customers.contactName,
@@ -14,10 +14,10 @@ class CustomersRepository extends BaseRepository {
         country: customers.country,
         id: customers.customerId,
       })
-      .from(customers)
-      .prepare();
-    const allCustomers: CustomerModel[] = await query.execute();
-    return allCustomers;
+      .from(customers);
+    type Result = Awaited<typeof allCustomers>;
+    const sql = allCustomers.toSQL();
+    return allCustomers as Result;
   };
   find = async (searchString: string): Promise<CustomerModel[]> => {
     const result = await this.db

@@ -1,6 +1,5 @@
 import { eq } from "drizzle-orm/expressions";
 import { AnyMySqlTable, InferModel } from "drizzle-orm/mysql-core";
-import { MySqlSelect } from "drizzle-orm/mysql-core/query-builders";
 import { MySql2Database } from "drizzle-orm/mysql2";
 import { database } from "../dbConnection";
 
