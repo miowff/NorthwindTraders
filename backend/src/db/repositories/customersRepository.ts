@@ -17,10 +17,9 @@ class CustomersRepository extends BaseRepository {
       .from(customers)
       .prepare();
     const allCustomers: CustomerModel[] = await query.execute();
-    const sql = query.toSQL();
     return allCustomers;
   };
-  find = async (searchString: string): Promise<any> => {
+  find = async (searchString: string): Promise<CustomerModel[]> => {
     const result = await this.db
       .select({
         companyName: customers.companyName,

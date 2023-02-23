@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm/expressions";
-import { AnyMySqlTable } from "drizzle-orm/mysql-core";
+import { AnyMySqlTable, InferModel } from "drizzle-orm/mysql-core";
 import { MySqlSelect } from "drizzle-orm/mysql-core/query-builders";
 import { MySql2Database } from "drizzle-orm/mysql2";
 import { database } from "../dbConnection";
@@ -14,7 +14,7 @@ export abstract class BaseRepository {
   getByColumn = async (
     column: string,
     value: any
-  ): Promise<MySqlSelect<AnyMySqlTable>> => {
+  ): Promise<InferModel<AnyMySqlTable>> => {
     const result = await database
       .select()
       .from(this.table)

@@ -1,5 +1,5 @@
 import { OrderModel } from "./order";
-import { ProductInOrder } from "./productInOrder";
+import { ProductInOrder } from "../product-models/productInOrder";
 
 export class OrderDetails extends OrderModel
 {

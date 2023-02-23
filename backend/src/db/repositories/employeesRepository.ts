@@ -19,7 +19,7 @@ export class EmployeesRepository extends BaseRepository {
       .from(this.table);
     return allEmployees;
   };
-  override getByColumn = async (column: string, value: any): Promise<any> => {
+  override getByColumn = async (column: string, value: any): Promise<EmployeeModel> => {
     const employee = await this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),

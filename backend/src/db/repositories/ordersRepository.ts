@@ -1,12 +1,14 @@
 import { sql } from "drizzle-orm";
 import { eq } from "drizzle-orm/expressions";
+import { OrderModel } from "src/models/order-models/order";
+import { OrderDetails } from "src/models/order-models/orderDetails";
 import { orderDetails } from "../schema/orderDetail";
 import { orders } from "../schema/orders";
 import { shippers } from "../schema/shippers";
 import { BaseRepository } from "./baseRepository";
 
 class OrdersRepositoy extends BaseRepository {
-  getAll = async (): Promise<any> => {
+  getAll = async (): Promise<OrderModel[]> => {
     const all = await this.db
       .select({
         TotalPrice:
@@ -27,7 +29,7 @@ class OrdersRepositoy extends BaseRepository {
   override getByColumn = async (
     column: string,
     value: number
-  ): Promise<any> => {
+  ): Promise<OrderDetails> => {
     const order = await this.db
       .select({
         customerId: orders.customerId,

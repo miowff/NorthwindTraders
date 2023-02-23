@@ -1,8 +1,7 @@
 import { sql } from "drizzle-orm";
 import { eq, like } from "drizzle-orm/expressions";
-import { ProductInOrder } from "src/models/order-models/productInOrder";
+import { ProductInOrder } from "src/models/product-models/productInOrder";
 import { ProductModel } from "src/models/product-models/product";
-import { ProductDetails } from "src/models/product-models/productDetails";
 import { orderDetails } from "../schema/orderDetail";
 import { products } from "../schema/products";
 import { suppliers } from "../schema/suppliers";
@@ -26,7 +25,7 @@ class ProductsRepository extends BaseRepository {
     column: string,
     value: number
   ): Promise<any> => {
-    const product: Array<ProductDetails> = await this.db
+    const product: Array<ProductModel> = await this.db
       .select({
         name: products.productName,
         quantityPerUnit: products.quantityPerUnit,
@@ -44,7 +43,7 @@ class ProductsRepository extends BaseRepository {
       .where(eq(products[column], value));
     return product;
   };
-  find = async (searchString: string): Promise<any> => {
+  find = async (searchString: string): Promise<ProductModel> => {
     const suitableProducts = await this.db
       .select({
         productName: products.productName,

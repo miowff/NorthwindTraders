@@ -1,4 +1,4 @@
-export class EmployeeModel {
+export interface EmployeeModel {
   name: string;
   title: string;
   city: string;
@@ -6,19 +6,13 @@ export class EmployeeModel {
   country: string;
   id: number;
   reportsTo:number;
-  constructor(
-    name: string,
-    title: string,
-    city: string,
-    phone: string,
-    country: string,
-    id: number
-  ) {
-    this.name = name;
-    this.title = title;
-    this.city = city;
-    this.phone = phone;
-    this.country = country;
-    this.id = id;
-  }
+  titleOfCourtesy?:string;
+  birthDate?:string;
+  hireDate?:string;
+  adress?:string;
+  postalCode?:string;
+  homePhone?:string;
+  extension?:string;
+  notes?:string;
+  
 }

@@ -1,9 +1,13 @@
-export class ProductModel
+export interface ProductModel
 {
     name:string;
     quantityPerUnit:string;
-    price:number;
+    price?:number;
     stock:number;
-    orders:number;
+    orders?:number;
     id:number;
+    supplie?:string;
+    supplierId?:number;
+    reorderLevel?:number;
+    discontinued?:number;
 }
