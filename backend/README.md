@@ -22,5 +22,8 @@ https://047amgofnf.execute-api.us-east-1.amazonaws.com/dev/suppliers
 #GetSupplierById
 'https://047amgofnf.execute-api.us-east-1.amazonaws.com/dev/supplier?id=1'
 
+#Search
+'https://047amgofnf.execute-api.us-east-1.amazonaws.com/dev/search?type=Products&pattern=ds'
+
 
 
