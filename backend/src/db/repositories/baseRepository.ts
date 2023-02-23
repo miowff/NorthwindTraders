@@ -16,9 +16,9 @@ export abstract class BaseRepository {
     value: any
   ): Promise<MySqlSelect<AnyMySqlTable>> => {
     const result = await database
-      .select(this.table)
+      .select()
+      .from(this.table)
       .where(eq(this.table[column], value));
     return result;
   };
-  
 }

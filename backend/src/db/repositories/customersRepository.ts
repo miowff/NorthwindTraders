@@ -6,27 +6,27 @@ import { BaseRepository } from "./baseRepository";
 class CustomersRepository extends BaseRepository {
   getAll = async (): Promise<CustomerModel[]> => {
     const allCustomers: CustomerModel[] = await this.db
-      .select(customers)
-      .fields({
+      .select({
         company: customers.companyName,
         contact: customers.contactName,
         title: customers.contactTitle,
         city: customers.city,
         country: customers.country,
         id: customers.customerId,
-      });
+      })
+      .from(customers);
     return allCustomers;
   };
   find = async (searchString: string): Promise<any> => {
     const result = await this.db
-      .select(customers)
-      .where(like(customers.companyName, `%${searchString}%`))
-      .fields({
+      .select({
         companyName: customers.companyName,
         contact: customers.contactName,
         title: customers.contactTitle,
         phone: customers.phone,
-      });
+      })
+      .from(customers)
+      .where(like(customers.companyName, `%${searchString}%`));
     return result;
   };
 }

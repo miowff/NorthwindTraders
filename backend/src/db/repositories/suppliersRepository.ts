@@ -5,15 +5,15 @@ import { BaseRepository } from "./baseRepository";
 class SuppliersRepository extends BaseRepository {
   getAll = async (): Promise<SupplierModel[]> => {
     const allSuppliers: SupplierModel[] = await this.db
-      .select(suppliers)
-      .fields({
+      .select({
         company: suppliers.companyName,
         contact: suppliers.contactName,
         title: suppliers.contactTitle,
         city: suppliers.city,
         country: suppliers.country,
         id: suppliers.supplierId,
-      });
+      })
+      .from(suppliers);
     return allSuppliers;
   };
 }

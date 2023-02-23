@@ -1,6 +1,5 @@
 import { drizzle } from "drizzle-orm/mysql2";
 import * as mysql from "mysql2/promise";
-import { MyLogger } from "./logger";
 
 const poolConnection = mysql.createPool({
   connectionLimit: 100,
@@ -11,4 +10,4 @@ const poolConnection = mysql.createPool({
   port: parseInt(process.env.NORTHWIND_TRADERS_DB_PORT),
 });
 
-export const database = drizzle(poolConnection, { logger: new MyLogger() });
+export const database = drizzle(poolConnection);

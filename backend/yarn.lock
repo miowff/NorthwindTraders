@@ -1026,13 +1026,6 @@ cross-spawn@^7.0.2:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-csv-parser@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/csv-parser/-/csv-parser-3.0.0.tgz#b88a6256d79e090a97a1b56451f9327b01d710e7"
-  integrity sha512-s6OYSXAK3IdKqYO33y09jhypG/bSDHPuyCme/IdEHfWpLf/jKcpitVFyOC6UemgGk8v7Q5u2XE0vvwmanxhGlQ==
-  dependencies:
-    minimist "^1.2.0"
-
 d@1, d@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/d/-/d-1.0.1.tgz#8698095372d58dbee346ffd0c7093f99f8f9eb5a"
@@ -1220,10 +1213,10 @@ drizzle-kit@^0.16.8:
     json-diff "0.9.0"
     zod "^3.20.2"
 
-drizzle-orm@^0.18.0:
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.18.0.tgz#bd2424d1bd17037f0866c5a43d068f41d12de4d2"
-  integrity sha512-il+iufRZVC+CL662l5gpO8gOnf17KDBakpkw0gzrTDperp0yyQu0NF9Ie+APgjj8q50J3qZf4CoTV8FeVax2Xg==
+drizzle-orm@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.20.2.tgz#2dd8477f12f8d1368a6fa0e32673b1cefb9f0ade"
+  integrity sha512-98A/wYzNZauIrNYW597RUTxRY6YFxwnNtA223De0wWPvkGinhlvOx5Ha2Q0CTafC/3Q7CDEt0jlfNZekHj/kyw==
 
 duration@^0.2.2:
   version "0.2.2"
@@ -2692,9 +2685,9 @@ lru-cache@^6.0.0:
     yallist "^4.0.0"
 
 lru-cache@^7.14.1:
-  version "7.14.1"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.14.1.tgz#8da8d2f5f59827edb388e63e459ac23d6d408fea"
-  integrity sha512-ysxwsnTKdAx96aTRdhDOCQfDgbHnt8SK0KY8SEjO0wHinhWOFTESbjVCMPbU1uGXg/ch4lifqx0wfjOawU2+WA==
+  version "7.17.0"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.17.0.tgz#00c7ba5919e5ea7c69ff94ddabbf32cb09ab805c"
+  integrity sha512-zSxlVVwOabhVyTi6E8gYv2cr6bXK+8ifYz5/uyJb9feXX6NACVDwY4p5Ut3WC3Ivo/QhpARHU3iujx2xGAYHbQ==
 
 lru-queue@^0.1.0:
   version "0.1.0"
@@ -2835,10 +2828,10 @@ mute-stream@0.0.8:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-mysql2@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/mysql2/-/mysql2-3.1.1.tgz#cd6ecb0b3b5a090f4749b9bb9c7b9d2ed2aabecc"
-  integrity sha512-mXz4wEj7AIKPdHQJLJcvq8GJ75BDMH9K4V8Lthra8WH7o/xjV6TXp+dXAXDaMFkLa8YhdZr5X6rxIGQSHPPfhg==
+mysql2@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/mysql2/-/mysql2-3.1.2.tgz#024a8bf7c84a300a8ed5c8e39b20ba57e47a2e24"
+  integrity sha512-NXz6sUvHSEOKz1jv3koSga7eb2dHrwD/mnPmqbbZzMRvjQcSpb0Eh0ectWyYt1U60CLlEbjoA3XYjjbbReRF5Q==
   dependencies:
     denque "^2.1.0"
     generate-function "^2.3.1"

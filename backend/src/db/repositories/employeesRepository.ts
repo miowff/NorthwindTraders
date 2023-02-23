@@ -7,8 +7,7 @@ import { BaseRepository } from "./baseRepository";
 export class EmployeesRepository extends BaseRepository {
   getAll = async (): Promise<EmployeeModel[]> => {
     const allEmployees: EmployeeModel[] = await this.db
-      .select(this.table)
-      .fields({
+      .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
         title: employees.title,
         city: employees.city,
@@ -16,14 +15,13 @@ export class EmployeesRepository extends BaseRepository {
         country: employees.country,
         id: employees.employeeId,
         reportsTo: employees.reportsTo,
-      });
+      })
+      .from(this.table);
     return allEmployees;
   };
   override getByColumn = async (column: string, value: any): Promise<any> => {
     const employee = await this.db
-      .select(this.table)
-      .where(eq(this.table[column], value))
-      .fields({
+      .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
         title: employees.title,
         titleOfCourtesy: employees.titleOfCourtesy,
@@ -37,7 +35,9 @@ export class EmployeesRepository extends BaseRepository {
         extension: employees.extension,
         notes: employees.notes,
         reportsToId: employees.reportsTo,
-      });
+      })
+      .from(this.table)
+      .where(eq(this.table[column], value));
     return employee;
   };
 }

@@ -8,9 +8,7 @@ import { BaseRepository } from "./baseRepository";
 class OrdersRepositoy extends BaseRepository {
   getAll = async (): Promise<any> => {
     const all = await this.db
-      .select(orders)
-      .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
-      .fields({
+      .select({
         TotalPrice:
           sql`SUM(${orderDetails.unitPrice} * ${orderDetails.quantity})`.as<number>(),
         Products: sql`SUM(${orderDetails.quantity})`,
@@ -21,6 +19,8 @@ class OrdersRepositoy extends BaseRepository {
         City: orders.shipCity,
         Country: orders.shipCountry,
       })
+      .from(orders)
+      .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
       .groupBy(orderDetails.orderId);
     return all;
   };
@@ -29,11 +29,7 @@ class OrdersRepositoy extends BaseRepository {
     value: number
   ): Promise<any> => {
     const order = await this.db
-      .select(orders)
-      .leftJoin(shippers, eq(shippers.shipperId, orders.shipVia))
-      .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
-      .where(eq(orders[column], value))
-      .fields({
+      .select({
         customerId: orders.customerId,
         shipName: orders.shipName,
         totalProducts: sql`COUNT(${orderDetails.orderId})`.as<number>(),
@@ -50,7 +46,11 @@ class OrdersRepositoy extends BaseRepository {
         shipCity: orders.shipCity,
         shipPostalCode: orders.shipPostalCode,
         shipCountry: orders.shipCountry,
-      });
+      })
+      .from(orders)
+      .leftJoin(shippers, eq(shippers.shipperId, orders.shipVia))
+      .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
+      .where(eq(orders[column], value));
     return order;
   };
 }

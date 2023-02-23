@@ -10,14 +10,16 @@ import { BaseRepository } from "./baseRepository";
 
 class ProductsRepository extends BaseRepository {
   getAll = async (): Promise<ProductModel[]> => {
-    const allProducs: ProductModel[] = await this.db.select(products).fields({
-      name: products.productName,
-      quantityPerUnit: products.quantityPerUnit,
-      price: products.unitPrice,
-      stock: products.unitsInStock,
-      orders: products.unitsOnOrder,
-      id: products.productId,
-    });
+    const allProducs: ProductModel[] = await this.db
+      .select({
+        name: products.productName,
+        quantityPerUnit: products.quantityPerUnit,
+        price: products.unitPrice,
+        stock: products.unitsInStock,
+        orders: products.unitsOnOrder,
+        id: products.productId,
+      })
+      .from(products);
     return allProducs;
   };
   override getByColumn = async (
@@ -25,10 +27,7 @@ class ProductsRepository extends BaseRepository {
     value: number
   ): Promise<any> => {
     const product: Array<ProductDetails> = await this.db
-      .select(products)
-      .leftJoin(suppliers, eq(suppliers.supplierId, products.supplierId))
-      .where(eq(products[column], value))
-      .fields({
+      .select({
         name: products.productName,
         quantityPerUnit: products.quantityPerUnit,
         price: products.unitPrice,
@@ -39,26 +38,27 @@ class ProductsRepository extends BaseRepository {
         supplierId: suppliers.supplierId,
         reorderLevel: products.reorderLevel,
         discontinued: products.discontinued,
-      });
+      })
+      .from(products)
+      .leftJoin(suppliers, eq(suppliers.supplierId, products.supplierId))
+      .where(eq(products[column], value));
     return product;
   };
   find = async (searchString: string): Promise<any> => {
     const suitableProducts = await this.db
-      .select(products)
-      .where(like(products.productName, `%${searchString}%`))
-      .fields({
+      .select({
         productName: products.productName,
         quantityPerUnit: products.quantityPerUnit,
         price: products.unitPrice,
         stock: products.unitsInStock,
-      });
+      })
+      .from(products)
+      .where(like(products.productName, `%${searchString}%`));
     return suitableProducts;
   };
   productsInOrder = async (orderId: number): Promise<ProductInOrder[]> => {
     const productsInOrder: ProductInOrder[] = await this.db
-      .select(orderDetails)
-      .leftJoin(products, eq(products.productId, orderDetails.productId))
-      .fields({
+      .select({
         productId: products.productId,
         productName: products.productName,
         orderPrice: orderDetails.unitPrice,
@@ -67,6 +67,8 @@ class ProductsRepository extends BaseRepository {
         totalPrice:
           sql`${orderDetails.unitPrice} * ${orderDetails.quantity}`.as<number>(),
       })
+      .from(orderDetails)
+      .leftJoin(products, eq(products.productId, orderDetails.productId))
       .where(eq(orderDetails.orderId, orderId));
     return productsInOrder;
   };
