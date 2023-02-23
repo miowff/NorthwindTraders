@@ -15,16 +15,13 @@ class EmployeesService {
     });
   };
   getById = async (id: number): Promise<ResponseDto> => {
-    const employee:EmployeeModel = await emplyeesRepository.getByColumn("employeeId", id);
-    if (!employee[0]) {
+    const employee = await emplyeesRepository.getById(id);
+    if (!employee) {
       throw ServicesError.EmployeeNotFound(id);
     }
-    const reportsTo = await emplyeesRepository.getByColumn(
-      "employeeId",
-      employee[0].reportsToId
-    );
-    if (reportsTo[0]) {
-      employee[0].reportsTo = reportsTo[0].name;
+    const reportsTo = await emplyeesRepository.getById(employee.reportsTo);
+    if (reportsTo) {
+      employee.reportsToName = reportsTo.name;
     }
     return new ResponseDto(employee, {
       time: new Date(),

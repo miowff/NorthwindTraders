@@ -16,27 +16,27 @@ class OrdersService {
     });
   };
   getById = async (id: number): Promise<ResponseDto> => {
-    const order = await ordersRepository.getByColumn("orderId", id);
-    if (!order[0].customerId) {
+    const order = await ordersRepository.getById(id);
+    if (!order.customerId) {
       throw ServicesError.OrderNotFound(id);
     }
     const details = await productsRepository.productsInOrder(id);
     const orderInfo: OrderDetails = {
       id: id,
-      customerId: order[0].customerId,
-      shipName: order[0].shipName,
-      totalProducts: order[0].totalProducts,
-      totalQuantity: order[0].totalQuantity,
-      totalPrice: order[0].totalPrice,
-      totalDiscount: order[0].totalDiscount,
-      shipVia: order[0].shipVia,
-      freight: order[0].freight,
-      orderDate: order[0].orderDate,
-      requiredDate: order[0].requiredDate,
-      shippedDate: order[0].shippedDate,
-      shipCity: order[0].shipCity,
-      shipPostalCode: order[0].shipPostalCode,
-      shipCountry: order[0].shipCountry,
+      customerId: order.customerId,
+      shipName: order.shipName,
+      totalProducts: order.totalProducts,
+      totalQuantity: order.totalQuantity,
+      totalPrice: order.totalPrice,
+      totalDiscount: order.totalDiscount,
+      shipVia: order.shipVia,
+      freight: order.freight,
+      orderDate: order.orderDate,
+      requiredDate: order.requiredDate,
+      shippedDate: order.shippedDate,
+      shipCity: order.shipCity,
+      shipPostalCode: order.shipPostalCode,
+      shipCountry: order.shipCountry,
       productsInOrder: details,
     };
     return new ResponseDto(orderInfo, {

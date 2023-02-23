@@ -26,8 +26,7 @@ class OrdersRepositoy extends BaseRepository {
       .groupBy(orderDetails.orderId);
     return all;
   };
-  override getByColumn = async (
-    column: string,
+  getById = async (
     value: number
   ): Promise<OrderDetails> => {
     const order = await this.db
@@ -53,7 +52,7 @@ class OrdersRepositoy extends BaseRepository {
       .from(orders)
       .leftJoin(shippers, eq(shippers.shipperId, orders.shipVia))
       .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
-      .where(eq(orders[column], value));
+      .where(eq(orders.orderId, value));
     return order[0];
   };
 }

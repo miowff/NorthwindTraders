@@ -7,11 +7,12 @@ export interface EmployeeModel {
   id: number;
   reportsTo?: number;
   titleOfCourtesy?: string;
-  birthDate?: string;
-  hireDate?: string;
+  birthDate?: Date;
+  hireDate?: Date;
   adress?: string;
   postalCode?: string;
   homePhone?: string;
   extension?: string;
   notes?: string;
+  reportsToName?:string;
 }

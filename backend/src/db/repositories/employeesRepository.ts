@@ -19,7 +19,7 @@ export class EmployeesRepository extends BaseRepository {
       .from(this.table);
     return allEmployees;
   };
-  override getByColumn = async (column: string, value: any): Promise<EmployeeModel> => {
+  getById = async (id: any): Promise<EmployeeModel> => {
     const employee = await this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
@@ -28,17 +28,17 @@ export class EmployeesRepository extends BaseRepository {
         birthDate: employees.birthDate,
         hireDate: employees.hireDate,
         address: employees.address,
-        city: employees.city,
+        city: employees.city, 
         postalCode: employees.postalCode,
         country: employees.country,
         homePhone: employees.homePhone,
         extension: employees.extension,
         notes: employees.notes,
-        reportsToId: employees.reportsTo,
-        id:employees.employeeId
+        reportsTo: employees.reportsTo,
+        id: employees.employeeId,
       })
-      .from(this.table)
-      .where(eq(this.table[column], value));
+      .from(employees)
+      .where(eq(employees.employeeId, id));
     return employee[0];
   };
 }
