@@ -2,7 +2,7 @@ import emplyeesRepository from "src/db/repositories/employeesRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { EmployeeModel } from "src/models/employees-models/employee";
 import { GetAllDto } from "src/models/response/getAllResponse";
-import { ResponseDto } from "src/models/response/responce";
+import { GetOneDto } from "src/models/response/responce";
 
 class EmployeesService {
   getAll = async (): Promise<GetAllDto<EmployeeModel>> => {
@@ -10,7 +10,7 @@ class EmployeesService {
     const { details, data: allEmployees } = response;
     return new GetAllDto(allEmployees, [details]);
   };
-  getById = async (id: number): Promise<ResponseDto<EmployeeModel>> => {
+  getById = async (id: number): Promise<GetOneDto<EmployeeModel>> => {
     const response = await emplyeesRepository.getById(id);
     const { details: getEmplyee, data: employee } = response;
     if (!employee) {
@@ -23,7 +23,7 @@ class EmployeesService {
     if (reportsTo) {
       employee.reportsToName = reportsTo.name;
     }
-    return new ResponseDto(employee, [getEmplyee, getEmployeeHead]);
+    return new GetOneDto(employee, [getEmplyee, getEmployeeHead]);
   };
 }
 

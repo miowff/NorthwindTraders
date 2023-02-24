@@ -4,7 +4,7 @@ import { ServicesError } from "src/errors/servicesError";
 import { OrderModel } from "src/models/order-models/order";
 import { OrderDetails } from "src/models/order-models/orderDetails";
 import { GetAllDto } from "src/models/response/getAllResponse";
-import { ResponseDto } from "src/models/response/responce";
+import { GetOneDto } from "src/models/response/responce";
 
 class OrdersService {
   getAll = async (): Promise<GetAllDto<OrderModel>> => {
@@ -12,7 +12,7 @@ class OrdersService {
     const { details, data: allOrders } = response;
     return new GetAllDto(allOrders, [details]);
   };
-  getById = async (id: number): Promise<ResponseDto<OrderModel>> => {
+  getById = async (id: number): Promise<GetOneDto<OrderModel>> => {
     const orderByIdResponse = await ordersRepository.getById(id);
     const { details: orderByIdDetails, data: order } = orderByIdResponse;
     if (!order.customerId) {
@@ -41,7 +41,7 @@ class OrdersService {
       shipCountry: order.shipCountry,
       productsInOrder: productsInOrder,
     };
-    return new ResponseDto(orderInfo, [
+    return new GetOneDto(orderInfo, [
       orderByIdDetails,
       productsInOrderDetails,
     ]);
