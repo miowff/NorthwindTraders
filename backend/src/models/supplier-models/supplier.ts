@@ -6,7 +6,7 @@ export interface SupplierModel
     city:string;
     country:string;
     supplierId:number;
-    adress?:string;
+    address?:string;
     region?:string;
     postalCode?:string;
     phone?:string
