@@ -1,8 +1,7 @@
 import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { ProductModel } from "src/models/product-models/product";
-import { ProductDetails } from "src/models/product-models/productDetails";
-import { ResponseDto } from "src/models/responce";
+import { ResponseDto } from "src/models/response/responce";
 import { OperationsTypes } from "src/operationTypes";
 
 class ProductsService {

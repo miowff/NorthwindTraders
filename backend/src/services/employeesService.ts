@@ -1,7 +1,7 @@
 import emplyeesRepository from "src/db/repositories/employeesRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { EmployeeModel } from "src/models/employees-models/employee";
-import { ResponseDto } from "src/models/responce";
+import { ResponseDto } from "src/models/response/responce";
 import { OperationsTypes } from "src/operationTypes";
 
 class EmployeesService {

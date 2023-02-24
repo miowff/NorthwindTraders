@@ -2,7 +2,7 @@ import ordersRepository from "src/db/repositories/ordersRepository";
 import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { OrderDetails } from "src/models/order-models/orderDetails";
-import { ResponseDto } from "src/models/responce";
+import { ResponseDto } from "src/models/response/responce";
 import { OperationsTypes } from "src/operationTypes";
 
 class OrdersService {

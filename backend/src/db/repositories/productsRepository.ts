@@ -43,18 +43,18 @@ class ProductsRepository extends BaseRepository {
       .where(eq(products[column], value));
     return product;
   };
-  find = async (searchString: string): Promise<ProductModel> => {
+  find = async (searchString: string): Promise<ProductModel[]> => {
     const suitableProducts = await this.db
       .select({
         name: products.productName,
         quantityPerUnit: products.quantityPerUnit,
         price: products.unitPrice,
         stock: products.unitsInStock,
-        id:products.productId
+        id: products.productId,
       })
       .from(products)
       .where(like(products.productName, `%${searchString}%`));
-    return suitableProducts[0];
+    return suitableProducts;
   };
   productsInOrder = async (orderId: number): Promise<ProductInOrder[]> => {
     const productsInOrder: ProductInOrder[] = await this.db

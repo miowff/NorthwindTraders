@@ -1,4 +1,4 @@
-import { ResponseDto } from "src/models/responce";
+import { ResponseDto } from "src/models/response/responce";
 import { ServicesError } from "src/errors/servicesError";
 import { OperationsTypes } from "src/operationTypes";
 import customersRepository from "src/db/repositories/customersRepository";

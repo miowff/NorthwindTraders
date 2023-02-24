@@ -1,6 +1,6 @@
 import suppliersRepository from "src/db/repositories/suppliersRepository";
 import { ServicesError } from "src/errors/servicesError";
-import { ResponseDto } from "src/models/responce";
+import { ResponseDto } from "src/models/response/responce";
 import { OperationsTypes } from "src/operationTypes";
 
 class SuppliersService {
