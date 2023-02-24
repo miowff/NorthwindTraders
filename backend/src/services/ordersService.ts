@@ -3,13 +3,14 @@ import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { OrderModel } from "src/models/order-models/order";
 import { OrderDetails } from "src/models/order-models/orderDetails";
+import { GetAllResponseDto } from "src/models/response/getAllResponse";
 import { ResponseDto } from "src/models/response/responce";
 
 class OrdersService {
-  getAll = async (): Promise<ResponseDto<OrderModel[]>> => {
+  getAll = async (): Promise<GetAllResponseDto<OrderModel>> => {
     const response = await ordersRepository.getAll();
     const { details, data: allOrders } = response;
-    return new ResponseDto(allOrders, [details]);
+    return new GetAllResponseDto(allOrders, [details]);
   };
   getById = async (id: number): Promise<ResponseDto<OrderModel>> => {
     const orderByIdResponse = await ordersRepository.getById(id);
