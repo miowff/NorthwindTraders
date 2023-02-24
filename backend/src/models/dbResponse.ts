@@ -1,6 +1,6 @@
-import { CustomerModel } from "./cusomer-models/customer";
+import { ResponseDetails } from "./response/responseDetails";
 
-export interface DatabaseRespose {
-  sql: string;
-  data:CustomerModel[];
+export interface DatabaseResponse<T extends Object> {
+  details:ResponseDetails;
+  data: T;
 }

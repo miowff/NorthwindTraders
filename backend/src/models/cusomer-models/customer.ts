@@ -5,7 +5,7 @@ export interface CustomerModel
     contactTitle:string,
     city?:string,
     country?:string
-    id:string;
+    customerId:string;
     adress?:string;
     postalCode?:string;
     region?:string;

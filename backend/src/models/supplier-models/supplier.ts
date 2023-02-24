@@ -2,10 +2,10 @@ export interface SupplierModel
 {
     companyName:string;
     contactName:string;
-    constactTitle:string;
+    contactTitle:string;
     city:string;
     country:string;
-    id:number;
+    supplierId:number;
     adress?:string;
     region?:string;
     postalCode?:string;

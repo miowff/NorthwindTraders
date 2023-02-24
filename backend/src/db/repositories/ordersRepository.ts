@@ -1,15 +1,18 @@
 import { sql } from "drizzle-orm";
 import { eq } from "drizzle-orm/expressions";
+import { DatabaseResponse } from "src/models/dbResponse";
 import { OrderModel } from "src/models/order-models/order";
 import { OrderDetails } from "src/models/order-models/orderDetails";
+import { ResponseDetails } from "src/models/response/responseDetails";
+import { OperationsTypes } from "src/operationTypes";
 import { orderDetails } from "../schema/orderDetail";
 import { orders } from "../schema/orders";
 import { shippers } from "../schema/shippers";
 import { BaseRepository } from "./baseRepository";
 
 class OrdersRepositoy extends BaseRepository {
-  getAll = async (): Promise<OrderModel[]> => {
-    const all = await this.db
+  getAll = async (): Promise<DatabaseResponse<OrderModel[]>> => {
+    const query = this.db
       .select({
         totalPrice:
           sql`SUM(${orderDetails.unitPrice} * ${orderDetails.quantity})`.as<number>(),
@@ -24,12 +27,20 @@ class OrdersRepositoy extends BaseRepository {
       .from(orders)
       .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
       .groupBy(orderDetails.orderId);
-    return all;
+    const sqlQuery = query.toSQL();
+    const allOrders = await query;
+    return {
+      details: new ResponseDetails(
+        new Date(),
+        OperationsTypes.SELECT_LEFT_JOIN,
+        1,
+        sqlQuery.sql
+      ),
+      data: allOrders,
+    };
   };
-  getById = async (
-    value: number
-  ): Promise<OrderDetails> => {
-    const order = await this.db
+  getById = async (value: number): Promise<DatabaseResponse<OrderDetails>> => {
+    const query = this.db
       .select({
         customerId: orders.customerId,
         shipName: orders.shipName,
@@ -53,7 +64,17 @@ class OrdersRepositoy extends BaseRepository {
       .leftJoin(shippers, eq(shippers.shipperId, orders.shipVia))
       .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
       .where(eq(orders.orderId, value));
-    return order[0];
+    const sqlQuery = query.toSQL();
+    const order = await query;
+    return {
+      details: new ResponseDetails(
+        new Date(),
+        OperationsTypes.SELECT_LEFT_JOIN,
+        1,
+        sqlQuery.sql
+      ),
+      data: order[0],
+    };
   };
 }
 

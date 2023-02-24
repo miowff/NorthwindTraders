@@ -1,29 +1,21 @@
 import suppliersRepository from "src/db/repositories/suppliersRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { ResponseDto } from "src/models/response/responce";
-import { OperationsTypes } from "src/operationTypes";
+import { SupplierModel } from "src/models/supplier-models/supplier";
 
 class SuppliersService {
-  getAll = async (): Promise<ResponseDto> => {
-    const allSuppliers = await suppliersRepository.getAll();
-    return new ResponseDto(allSuppliers, {
-      time: new Date(),
-      operation: OperationsTypes.SELECT,
-      resultsCount: allSuppliers.length,
-      operationDescription: "SELECT * FROM Suppliers",
-    });
+  getAll = async (): Promise<ResponseDto<SupplierModel[]>> => {
+    const response = await suppliersRepository.getAll();
+    const { details, data } = response;
+    return new ResponseDto(data, [details]);
   };
-  getById = async (id: number): Promise<ResponseDto> => {
-    const supplier = await suppliersRepository.getByColumn("supplierId", id);
-    if (!supplier[0]) {
+  getById = async (id: number): Promise<ResponseDto<SupplierModel>> => {
+    const response = await suppliersRepository.getById(id);
+    const { details, data } = response;
+    if (!data) {
       throw ServicesError.SupplierNotFound(id);
     }
-    return new ResponseDto(supplier[0], {
-      time: new Date(),
-      operation: OperationsTypes.SELECT_WHERE,
-      resultsCount: 1,
-      operationDescription: `SELECT * FROM Suppliers WHERE SupplierID = ${id}`,
-    });
+    return new ResponseDto(data, [details]);
   };
 }
 

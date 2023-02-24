@@ -2,33 +2,27 @@ import emplyeesRepository from "src/db/repositories/employeesRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { EmployeeModel } from "src/models/employees-models/employee";
 import { ResponseDto } from "src/models/response/responce";
-import { OperationsTypes } from "src/operationTypes";
 
 class EmployeesService {
-  getAll = async (): Promise<ResponseDto> => {
-    const allEmployees = await emplyeesRepository.getAll();
-    return new ResponseDto(allEmployees, {
-      time: new Date(),
-      operation: OperationsTypes.SELECT,
-      resultsCount: allEmployees.length,
-      operationDescription: "SELECT * FROM Employees",
-    });
+  getAll = async (): Promise<ResponseDto<EmployeeModel[]>> => {
+    const response = await emplyeesRepository.getAll();
+    const { details, data: allEmployees } = response;
+    return new ResponseDto(allEmployees, [details]);
   };
-  getById = async (id: number): Promise<ResponseDto> => {
-    const employee = await emplyeesRepository.getById(id);
+  getById = async (id: number): Promise<ResponseDto<EmployeeModel>> => {
+    const response = await emplyeesRepository.getById(id);
+    const { details: getEmplyee, data: employee } = response;
     if (!employee) {
       throw ServicesError.EmployeeNotFound(id);
     }
-    const reportsTo = await emplyeesRepository.getById(employee.reportsTo);
+    const reportsToResponse = await emplyeesRepository.getById(
+      employee.reportsTo
+    );
+    const { details: getEmployeeHead, data: reportsTo } = reportsToResponse;
     if (reportsTo) {
       employee.reportsToName = reportsTo.name;
     }
-    return new ResponseDto(employee, {
-      time: new Date(),
-      operation: OperationsTypes.SELECT,
-      resultsCount: 1,
-      operationDescription: `SELECT * FROM Employees WHERE Employees.EmployeeID = ${id}`,
-    });
+    return new ResponseDto(employee, [getEmplyee, getEmployeeHead]);
   };
 }
 

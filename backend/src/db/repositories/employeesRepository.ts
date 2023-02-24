@@ -1,12 +1,15 @@
 import { sql } from "drizzle-orm";
 import { eq } from "drizzle-orm/expressions";
+import { DatabaseResponse } from "src/models/dbResponse";
 import { EmployeeModel } from "src/models/employees-models/employee";
+import { ResponseDetails } from "src/models/response/responseDetails";
+import { OperationsTypes } from "src/operationTypes";
 import { employees } from "../schema/employees";
 import { BaseRepository } from "./baseRepository";
 
 export class EmployeesRepository extends BaseRepository {
-  getAll = async (): Promise<EmployeeModel[]> => {
-    const allEmployees = await this.db
+  getAll = async (): Promise<DatabaseResponse<EmployeeModel[]>> => {
+    const query = this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
         title: employees.title,
@@ -17,10 +20,20 @@ export class EmployeesRepository extends BaseRepository {
         reportsTo: employees.reportsTo,
       })
       .from(this.table);
-    return allEmployees;
+    const sqlQuery = query.toSQL();
+    const allEmployees = await query;
+    return {
+      details: new ResponseDetails(
+        new Date(),
+        OperationsTypes.SELECT,
+        allEmployees.length,
+        sqlQuery.sql
+      ),
+      data: allEmployees,
+    };
   };
-  getById = async (id: any): Promise<EmployeeModel> => {
-    const employee = await this.db
+  getById = async (id: any): Promise<DatabaseResponse<EmployeeModel>> => {
+    const query = this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
         title: employees.title,
@@ -28,7 +41,7 @@ export class EmployeesRepository extends BaseRepository {
         birthDate: employees.birthDate,
         hireDate: employees.hireDate,
         address: employees.address,
-        city: employees.city, 
+        city: employees.city,
         postalCode: employees.postalCode,
         country: employees.country,
         homePhone: employees.homePhone,
@@ -39,7 +52,17 @@ export class EmployeesRepository extends BaseRepository {
       })
       .from(employees)
       .where(eq(employees.employeeId, id));
-    return employee[0];
+    const sqlQuery = query.toSQL();
+    const employee = await query;
+    return {
+      details: new ResponseDetails(
+        new Date(),
+        OperationsTypes.SELECT,
+        1,
+        sqlQuery.sql
+      ),
+      data: employee[0],
+    };
   };
 }
 

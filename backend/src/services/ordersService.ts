@@ -1,26 +1,27 @@
 import ordersRepository from "src/db/repositories/ordersRepository";
 import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
+import { OrderModel } from "src/models/order-models/order";
 import { OrderDetails } from "src/models/order-models/orderDetails";
 import { ResponseDto } from "src/models/response/responce";
-import { OperationsTypes } from "src/operationTypes";
 
 class OrdersService {
-  getAll = async (): Promise<ResponseDto> => {
-    const result = await ordersRepository.getAll();
-    return new ResponseDto(result, {
-      time: new Date(),
-      operation: OperationsTypes.SELECT,
-      resultsCount: Object.keys(result).length,
-      operationDescription: "SELECT * FROM Orders",
-    });
+  getAll = async (): Promise<ResponseDto<OrderModel[]>> => {
+    const response = await ordersRepository.getAll();
+    const { details, data: allOrders } = response;
+    return new ResponseDto(allOrders, [details]);
   };
-  getById = async (id: number): Promise<ResponseDto> => {
-    const order = await ordersRepository.getById(id);
+  getById = async (id: number): Promise<ResponseDto<OrderModel>> => {
+    const orderByIdResponse = await ordersRepository.getById(id);
+    const { details: orderByIdDetails, data: order } = orderByIdResponse;
     if (!order.customerId) {
       throw ServicesError.OrderNotFound(id);
     }
-    const details = await productsRepository.productsInOrder(id);
+    const productsInOrderResponse = await productsRepository.productsInOrder(
+      id
+    );
+    const { details: productsInOrderDetails, data: productsInOrder } =
+      productsInOrderResponse;
     const orderInfo: OrderDetails = {
       id: id,
       customerId: order.customerId,
@@ -37,16 +38,12 @@ class OrdersService {
       shipCity: order.shipCity,
       shipPostalCode: order.shipPostalCode,
       shipCountry: order.shipCountry,
-      productsInOrder: details,
+      productsInOrder: productsInOrder,
     };
-    return new ResponseDto(orderInfo, {
-      time: new Date(),
-      operation: OperationsTypes.SELECT_LEFT_JOIN,
-      resultsCount: 1,
-      operationDescription: `SELECT * LEFT JOIN Shippers ON Orders.ShipVia 
-      LEFT JOIN OrderDetails ON Orders.OrderID LEFT JOIN Products ON OrderDetails.ProductID,
-      WHERE Orders.ID = ${id}`,
-    });
+    return new ResponseDto(orderInfo, [
+      orderByIdDetails,
+      productsInOrderDetails,
+    ]);
   };
 }
 
