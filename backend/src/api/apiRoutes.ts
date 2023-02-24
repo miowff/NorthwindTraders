@@ -58,7 +58,7 @@ export const getSupplierById = async (id: number): Promise<any> => {
   return response.data;
 };
 
-//entity = "customer" | "product" other values cause an error
+//entity = "customers" | "products" other values cause an error
 export const search = async (entity: string, pattern: string): Promise<any> => {
   const response = await axios.get(`${process.env.API_ENDPOINT}/dev/search`, {
     params: { type: entity, pattern: pattern },

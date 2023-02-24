@@ -18,7 +18,7 @@ class CustomersService {
     if (!customer[0]) {
       throw ServicesError.CustomerNotFound(id);
     }
-    return new ResponseDto(customer, {
+    return new ResponseDto(customer[0], {
       time: new Date(),
       operation: OperationsTypes.SELECT_WHERE,
       resultsCount: 1,
