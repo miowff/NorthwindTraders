@@ -1,14 +1,14 @@
 import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { ProductModel } from "src/models/product-models/product";
-import { GetAllResponseDto } from "src/models/response/getAllResponse";
+import { GetAllDto } from "src/models/response/getAllResponse";
 import { ResponseDto } from "src/models/response/responce";
 
 class ProductsService {
-  getAll = async (): Promise<GetAllResponseDto<ProductModel>> => {
+  getAll = async (): Promise<GetAllDto<ProductModel>> => {
     const query = await productsRepository.getAll();
     const { details, data: allProducs } = query;
-    return new GetAllResponseDto(allProducs, [details]);
+    return new GetAllDto(allProducs, [details]);
   };
   getById = async (id: number): Promise<ResponseDto<ProductModel>> => {
     const response = await productsRepository.getById(id);
@@ -20,10 +20,10 @@ class ProductsService {
   };
   search = async (
     searchString: string
-  ): Promise<GetAllResponseDto<ProductModel>> => {
+  ): Promise<GetAllDto<ProductModel>> => {
     const response = await productsRepository.find(searchString);
     const { details, data: suitableProducts } = response;
-    return new GetAllResponseDto(suitableProducts, [details]);
+    return new GetAllDto(suitableProducts, [details]);
   };
 }
 

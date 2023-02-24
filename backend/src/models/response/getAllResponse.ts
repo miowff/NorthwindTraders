@@ -1,6 +1,6 @@
 import { ResponseDetails } from "./responseDetails";
 
-export class GetAllResponseDto<T> {
+export class GetAllDto<T> {
     allValues: T[];
     responseDetails: ResponseDetails[];
     constructor(allValues: T[], details: ResponseDetails[]) {

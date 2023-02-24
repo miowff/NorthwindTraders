@@ -2,13 +2,13 @@ import { ResponseDto } from "src/models/response/responce";
 import { ServicesError } from "src/errors/servicesError";
 import customersRepository from "src/db/repositories/customersRepository";
 import { CustomerModel } from "src/models/cusomer-models/customer";
-import { GetAllResponseDto } from "src/models/response/getAllResponse";
+import { GetAllDto } from "src/models/response/getAllResponse";
 
 class CustomersService {
-  getAll = async (): Promise<GetAllResponseDto<CustomerModel>> => {
+  getAll = async (): Promise<GetAllDto<CustomerModel>> => {
     const response = await customersRepository.getAll();
     const { details, data:allCustomers } = response;
-    return new GetAllResponseDto(allCustomers, [details]);
+    return new GetAllDto(allCustomers, [details]);
   };
   getById = async (id: string): Promise<ResponseDto<CustomerModel>> => {
     const response = await customersRepository.getById(id);
@@ -20,10 +20,10 @@ class CustomersService {
   };
   find = async (
     searchString: string
-  ): Promise<GetAllResponseDto<CustomerModel>> => {
+  ): Promise<GetAllDto<CustomerModel>> => {
     const response = await customersRepository.find(searchString);
     const { details, data:suitableCustomers } = response;
-    return new GetAllResponseDto(suitableCustomers, [details]);
+    return new GetAllDto(suitableCustomers, [details]);
   };
 }
 
