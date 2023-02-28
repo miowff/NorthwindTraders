@@ -1,5 +1,7 @@
 import { eq, like } from "drizzle-orm/expressions";
 import { CustomerModel } from "src/models/cusomer-models/customer";
+import { CustomerDetails } from "src/models/cusomer-models/customerDetails";
+import { SearchResultCustomer } from "src/models/cusomer-models/searchResultCustomer";
 import { DatabaseResponse } from "src/models/dbResponse";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
@@ -30,7 +32,7 @@ class CustomersRepository extends BaseRepository {
       data: allCustomers,
     };
   };
-  getById = async (id: string): Promise<DatabaseResponse<CustomerModel>> => {
+  getById = async (id: string): Promise<DatabaseResponse<CustomerDetails>> => {
     const query = this.db
       .select()
       .from(customers)
@@ -49,7 +51,7 @@ class CustomersRepository extends BaseRepository {
   };
   find = async (
     searchString: string
-  ): Promise<DatabaseResponse<CustomerModel[]>> => {
+  ): Promise<DatabaseResponse<SearchResultCustomer[]>> => {
     const query = this.db
       .select({
         companyName: customers.companyName,

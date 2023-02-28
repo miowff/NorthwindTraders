@@ -12,7 +12,7 @@ class OrdersService {
     const { details, data: allOrders } = response;
     return new GetAllDto(allOrders, [details]);
   };
-  getById = async (id: number): Promise<GetOneDto<OrderModel>> => {
+  getById = async (id: number): Promise<GetOneDto<OrderDetails>> => {
     const orderByIdResponse = await ordersRepository.getById(id);
     const { details: orderByIdDetails, data: order } = orderByIdResponse;
     if (!order.customerId) {

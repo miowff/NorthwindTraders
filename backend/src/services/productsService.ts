@@ -1,6 +1,8 @@
 import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { ProductModel } from "src/models/product-models/product";
+import { ProductDetails } from "src/models/product-models/productDetails";
+import { SearchResultProduct } from "src/models/product-models/searchResultProduct";
 import { GetAllDto } from "src/models/response/getAllResponse";
 import { GetOneDto } from "src/models/response/responce";
 
@@ -10,7 +12,7 @@ class ProductsService {
     const { details, data: allProducs } = query;
     return new GetAllDto(allProducs, [details]);
   };
-  getById = async (id: number): Promise<GetOneDto<ProductModel>> => {
+  getById = async (id: number): Promise<GetOneDto<ProductDetails>> => {
     const response = await productsRepository.getById(id);
     const { details, data: product } = response;
     if (!product) {
@@ -20,7 +22,7 @@ class ProductsService {
   };
   search = async (
     searchString: string
-  ): Promise<GetAllDto<ProductModel>> => {
+  ): Promise<GetAllDto<SearchResultProduct>> => {
     const response = await productsRepository.find(searchString);
     const { details, data: suitableProducts } = response;
     return new GetAllDto(suitableProducts, [details]);

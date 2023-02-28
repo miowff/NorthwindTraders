@@ -1,6 +1,7 @@
 import emplyeesRepository from "src/db/repositories/employeesRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { EmployeeModel } from "src/models/employees-models/employee";
+import { EmployeeDetails } from "src/models/employees-models/employeeDetails";
 import { GetAllDto } from "src/models/response/getAllResponse";
 import { GetOneDto } from "src/models/response/responce";
 
@@ -10,7 +11,7 @@ class EmployeesService {
     const { details, data: allEmployees } = response;
     return new GetAllDto(allEmployees, [details]);
   };
-  getById = async (id: number): Promise<GetOneDto<EmployeeModel>> => {
+  getById = async (id: number): Promise<GetOneDto<EmployeeDetails>> => {
     const response = await emplyeesRepository.getById(id);
     const { details: getEmplyee, data: employee } = response;
     if (!employee) {

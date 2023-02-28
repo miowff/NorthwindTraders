@@ -1,8 +1,7 @@
-export interface ProductModel {
+export interface SearchResultProduct {
   name: string;
   quantityPerUnit: string;
   price: number;
   stock: number;
-  orders: number;
   id: number;
 }

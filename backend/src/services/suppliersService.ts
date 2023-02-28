@@ -3,6 +3,7 @@ import { ServicesError } from "src/errors/servicesError";
 import { GetAllDto } from "src/models/response/getAllResponse";
 import { GetOneDto } from "src/models/response/responce";
 import { SupplierModel } from "src/models/supplier-models/supplier";
+import { SupplierDetails } from "src/models/supplier-models/supplierDetails";
 
 class SuppliersService {
   getAll = async (): Promise<GetAllDto<SupplierModel>> => {
@@ -10,7 +11,7 @@ class SuppliersService {
     const { details, data: suppliers } = response;
     return new GetAllDto(suppliers, [details]);
   };
-  getById = async (id: number): Promise<GetOneDto<SupplierModel>> => {
+  getById = async (id: number): Promise<GetOneDto<SupplierDetails>> => {
     const response = await suppliersRepository.getById(id);
     const { details, data: supplier } = response;
     if (!supplier) {

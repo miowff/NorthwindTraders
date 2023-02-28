@@ -1,8 +1,7 @@
-export interface CustomerModel {
+export interface SearchResultCustomer {
   companyName: string;
   contactName: string;
   contactTitle: string;
-  city: string;
-  country: string;
+  phone: string;
   customerId: string;
 }

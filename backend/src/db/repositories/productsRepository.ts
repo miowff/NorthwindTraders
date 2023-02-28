@@ -9,6 +9,8 @@ import { BaseRepository } from "./baseRepository";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
 import { DatabaseResponse } from "src/models/dbResponse";
+import { ProductDetails } from "src/models/product-models/productDetails";
+import { SearchResultProduct } from "src/models/product-models/searchResultProduct";
 
 class ProductsRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<ProductModel[]>> => {
@@ -34,7 +36,7 @@ class ProductsRepository extends BaseRepository {
       data: allProducts,
     };
   };
-  getById = async (id: number): Promise<DatabaseResponse<ProductModel>> => {
+  getById = async (id: number): Promise<DatabaseResponse<ProductDetails>> => {
     const query = this.db
       .select({
         name: products.productName,
@@ -65,7 +67,7 @@ class ProductsRepository extends BaseRepository {
   };
   find = async (
     searchString: string
-  ): Promise<DatabaseResponse<ProductModel[]>> => {
+  ): Promise<DatabaseResponse<SearchResultProduct[]>> => {
     const query = this.db
       .select({
         name: products.productName,

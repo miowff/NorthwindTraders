@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm/expressions";
 import { DatabaseResponse } from "src/models/dbResponse";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { SupplierModel } from "src/models/supplier-models/supplier";
+import { SupplierDetails } from "src/models/supplier-models/supplierDetails";
 import { OperationsTypes } from "src/operationTypes";
 import { suppliers } from "../schema/suppliers";
 import { BaseRepository } from "./baseRepository";
@@ -30,7 +31,7 @@ class SuppliersRepository extends BaseRepository {
       data: allSuppliers,
     };
   };
-  getById = async (id: number): Promise<DatabaseResponse<SupplierModel>> => {
+  getById = async (id: number): Promise<DatabaseResponse<SupplierDetails>> => {
     const query = this.db
       .select()
       .from(suppliers)
