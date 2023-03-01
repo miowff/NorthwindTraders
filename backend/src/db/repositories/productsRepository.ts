@@ -43,7 +43,7 @@ class ProductsRepository extends BaseRepository {
         quantityPerUnit: products.quantityPerUnit,
         price: products.unitPrice,
         stock: products.unitsInStock,
-        orders: products.unitsOnOrder,
+        unitsInOrder: products.unitsOnOrder,
         id: products.productId,
         supplier: suppliers.companyName,
         supplierId: suppliers.supplierId,
