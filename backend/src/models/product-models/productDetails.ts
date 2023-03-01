@@ -5,7 +5,7 @@ export interface ProductDetails {
   stock: number;
   orders: number;
   id: number;
-  supplie: string;
+  supplier: string;
   supplierId: number;
   reorderLevel: number;
   discontinued: number;
