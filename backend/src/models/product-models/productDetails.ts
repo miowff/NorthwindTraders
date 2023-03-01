@@ -3,10 +3,10 @@ export interface ProductDetails {
   quantityPerUnit: string;
   price: number;
   stock: number;
-  orders?: number;
+  orders: number;
   id: number;
-  supplie?: string;
-  supplierId?: number;
-  reorderLevel?: number;
-  discontinued?: number;
+  supplie: string;
+  supplierId: number;
+  reorderLevel: number;
+  discontinued: number;
 }

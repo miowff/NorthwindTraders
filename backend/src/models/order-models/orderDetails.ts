@@ -9,5 +9,5 @@ export class OrderDetails extends OrderModel {
   orderDate: Date;
   requiredDate: Date;
   shipPostalCode: string;
-  productsInOrder?: ProductInOrder[];
+  productsInOrder: ProductInOrder[];
 }
