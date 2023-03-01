@@ -13,5 +13,5 @@ export interface EmployeeDetails {
   homePhone: string;
   extension: string;
   notes: string;
-  reportsToName?: string;
+  reportsToName: string;
 }
