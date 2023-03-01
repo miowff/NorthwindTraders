@@ -3,7 +3,7 @@ export interface ProductDetails {
   quantityPerUnit: string;
   price: number;
   stock: number;
-  orders: number;
+  uitsInOrder: number;
   id: number;
   supplier: string;
   supplierId: number;
