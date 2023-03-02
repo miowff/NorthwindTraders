@@ -5,8 +5,8 @@ export interface ProductDetails {
   stock: number;
   unitsInOrder: number;
   id: number;
-  supplier: string;
-  supplierId: number;
+  supplier: string | null;
+  supplierId: number | null;
   reorderLevel: number;
   discontinued: number;
 }

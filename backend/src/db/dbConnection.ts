@@ -7,7 +7,7 @@ const poolConnection = mysql.createPool({
   user: process.env.NORTHWIND_TRADERS_DB_USERNAME,
   database: process.env.NORTHWIND_TRADERS_DB_NAME,
   password: process.env.NORTHWIND_TRADERS_DB_PASSWORD,
-  port: parseInt(process.env.NORTHWIND_TRADERS_DB_PORT),
+  port: parseInt(process.env.NORTHWIND_TRADERS_DB_PORT as string),
 });
 
 export const database = drizzle(poolConnection);

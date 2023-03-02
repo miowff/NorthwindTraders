@@ -22,7 +22,7 @@ class EmployeesService {
       employee.reportsToId
     );
     const employeeModel: EmployeeDetails = Object.assign(
-      { reportsTo: undefined },
+      { reportsTo: null },
       employee
     );
     const { details: getEmployeeHead, data: reportsTo } = reportsToResponse;

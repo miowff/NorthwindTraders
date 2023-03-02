@@ -9,15 +9,25 @@ export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const id = event.queryStringParameters["id"];
-    if (!id) {
-      return { statusCode: 400, body: "Bad request! id query param is null." };
+    if (event.queryStringParameters) {
+      const id = event.queryStringParameters["id"];
+      if (!id) {
+        return {
+          statusCode: 400,
+          body: "Bad request! id query param is null.",
+        };
+      }
+      const customer = await customersService.getById(id);
+      return {
+        statusCode: 200,
+        headers: HEADERS,
+        body: JSON.stringify(customer),
+      };
     }
-    const customer = await customersService.getById(id);
     return {
-      statusCode: 200,
+      statusCode: 400,
       headers: HEADERS,
-      body: JSON.stringify(customer),
+      body: JSON.stringify(`Bad request`),
     };
   } catch (err) {
     return {

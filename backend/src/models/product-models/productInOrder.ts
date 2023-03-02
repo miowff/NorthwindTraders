@@ -1,6 +1,6 @@
-export class ProductInOrder {
-  productId: number;
-  productName: string;
+export interface ProductInOrder {
+  productId: number | null;
+  productName: string | null;
   quantity: number;
   orderPrice: number;
   discount: number;

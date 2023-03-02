@@ -1,4 +1,4 @@
-import { int, mysqlTable} from "drizzle-orm/mysql-core";
+import { int, mysqlTable } from "drizzle-orm/mysql-core";
 import { employees } from "./employees";
 import { territories } from "./territories";
 

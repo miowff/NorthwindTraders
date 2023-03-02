@@ -9,7 +9,7 @@ export interface Order {
   shipCountry: string;
   customerId: string;
   totalDiscount: number;
-  shipVia: string;
+  shipVia: string | null;
   freight: number;
   orderDate: Date;
   requiredDate: Date;

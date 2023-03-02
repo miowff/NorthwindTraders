@@ -1,8 +1,4 @@
-import {
-  mysqlTable,
-  int,
-  float,
-} from "drizzle-orm/mysql-core";
+import { mysqlTable, int, float } from "drizzle-orm/mysql-core";
 import { orders } from "./orders";
 import { products } from "./products";
 
