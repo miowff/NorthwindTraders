@@ -99,9 +99,9 @@ class ProductsRepository extends BaseRepository {
         productName: products.productName,
         orderPrice: orderDetails.unitPrice,
         quantity: orderDetails.quantity,
-        discount: orderDetails.discount,
+        discount: sql`ROUND(${orderDetails.discount} * 100,2)`.as<number>(),
         totalPrice:
-          sql`${orderDetails.unitPrice} * ${orderDetails.quantity}`.as<number>(),
+          sql`ROUND(${orderDetails.unitPrice} * ${orderDetails.quantity},2)`.as<number>(),
       })
       .from(orderDetails)
       .leftJoin(products, eq(products.productId, orderDetails.productId))

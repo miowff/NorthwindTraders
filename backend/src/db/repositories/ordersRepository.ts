@@ -15,7 +15,7 @@ class OrdersRepository extends BaseRepository {
     const query = this.db
       .select({
         totalPrice:
-          sql`SUM(${orderDetails.unitPrice} * ${orderDetails.quantity})`.as<number>(),
+          sql`ROUND(SUM(${orderDetails.unitPrice} * ${orderDetails.quantity}),3)`.as<number>(),
         totalProducts: sql`SUM(${orderDetails.quantity})`.as<number>(),
         totalQuantity: sql`COUNT(${orderDetails.orderId})`.as<number>(),
         id: orders.orderId,
@@ -47,9 +47,9 @@ class OrdersRepository extends BaseRepository {
         totalProducts: sql`COUNT(${orderDetails.orderId})`.as<number>(),
         totalQuantity: sql`SUM(${orderDetails.quantity})`.as<number>(),
         totalPrice:
-          sql`SUM(${orderDetails.unitPrice} * ${orderDetails.quantity})`.as<number>(),
+          sql`ROUND(SUM(${orderDetails.unitPrice} * ${orderDetails.quantity}),3)`.as<number>(),
         totalDiscount:
-          sql`SUM(${orderDetails.unitPrice}*${orderDetails.quantity}*${orderDetails.discount})`.as<number>(),
+          sql`ROUND(SUM(${orderDetails.unitPrice}*${orderDetails.quantity}*${orderDetails.discount}),3)`.as<number>(),
         shipVia: shippers.companyName,
         freight: orders.freight,
         orderDate: orders.orderDate,
