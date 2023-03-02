@@ -47,7 +47,7 @@ export class EmployeesRepository extends BaseRepository {
         homePhone: employees.homePhone,
         extension: employees.extension,
         notes: employees.notes,
-        reportsToId: employees.reportsTo,
+        reportsTo: employees.reportsTo,
         id: employees.employeeId,
       })
       .from(employees)

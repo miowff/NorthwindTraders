@@ -14,6 +14,5 @@ export interface EmployeeDetails {
   homePhone: string;
   extension: string;
   notes: string;
-  reportsToId:number;
   reportsTo: EmployeeHead | null;
 }

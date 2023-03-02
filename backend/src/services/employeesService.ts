@@ -19,18 +19,21 @@ class EmployeesService {
       throw ServicesError.EmployeeNotFound(id);
     }
     const reportsToResponse = await employeesRepository.getById(
-      employee.reportsToId
+      employee.reportsTo
     );
-    const employeeModel: EmployeeDetails = Object.assign(
-      { reportsTo: null },
-      employee
-    );
+
     const { details: getEmployeeHead, data: reportsTo } = reportsToResponse;
     if (reportsTo) {
-      const { id, name } = reportsTo;
-      const employeeHead: EmployeeHead = { id: id, name: name };
-      employeeModel.reportsTo = employeeHead;
+      const { id: headId, name: headName } = reportsTo;
+      const employeeHead: EmployeeHead = { id: headId, name: headName };
+      const employeeModel: EmployeeDetails = Object.assign(employee, {
+        reportsTo: employeeHead,
+      });
+      return new GetOneDto(employeeModel, [getEmployee, getEmployeeHead]);
     }
+    const employeeModel: EmployeeDetails = Object.assign(employee, {
+      reportsTo: null,
+    });
     return new GetOneDto(employeeModel, [getEmployee, getEmployeeHead]);
   };
 }
