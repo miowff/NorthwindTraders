@@ -10,7 +10,7 @@ import { orders } from "../schema/orders";
 import { shippers } from "../schema/shippers";
 import { BaseRepository } from "./baseRepository";
 
-class OrdersRepositoy extends BaseRepository {
+class OrdersRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<OrderModel[]>> => {
     const query = this.db
       .select({
@@ -78,5 +78,5 @@ class OrdersRepositoy extends BaseRepository {
   };
 }
 
-const ordersRepository = new OrdersRepositoy(orders);
+const ordersRepository = new OrdersRepository(orders);
 export default ordersRepository;

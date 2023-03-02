@@ -1,10 +1,11 @@
+import { EmployeeHead } from "./employeeHead";
+
 export interface EmployeeDetails {
   name: string;
   title: string;
   city: string;
   country: string;
   id: number;
-  reportsTo: number;
   titleOfCourtesy: string;
   birthDate: Date;
   hireDate: Date;
@@ -13,5 +14,6 @@ export interface EmployeeDetails {
   homePhone: string;
   extension: string;
   notes: string;
-  reportsToName: string;
+  reportsToId:number;
+  reportsTo?: EmployeeHead;
 }

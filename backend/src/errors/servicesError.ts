@@ -12,7 +12,7 @@ export class ServicesError extends Error {
     return new ServicesError(`There is no employee with id:${id}`);
   }
   static ProductNotFound(id: any) {
-    return new ServicesError(`Thre is no product with id:${id}`);
+    return new ServicesError(`There is no product with id:${id}`);
   }
   static SupplierNotFound(id: any) {
     return new ServicesError(`There is no supplier with id:${id}`);

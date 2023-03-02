@@ -4,7 +4,7 @@ import { ServicesError } from "src/errors/servicesError";
 import { OrderModel } from "src/models/order-models/order";
 import { OrderDetails } from "src/models/order-models/orderDetails";
 import { GetAllDto } from "src/models/response/getAllResponse";
-import { GetOneDto } from "src/models/response/responce";
+import { GetOneDto } from "src/models/response/response";
 
 class OrdersService {
   getAll = async (): Promise<GetAllDto<OrderModel>> => {

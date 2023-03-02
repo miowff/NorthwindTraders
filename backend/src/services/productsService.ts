@@ -4,13 +4,13 @@ import { ProductModel } from "src/models/product-models/product";
 import { ProductDetails } from "src/models/product-models/productDetails";
 import { SearchResultProduct } from "src/models/product-models/searchResultProduct";
 import { GetAllDto } from "src/models/response/getAllResponse";
-import { GetOneDto } from "src/models/response/responce";
+import { GetOneDto } from "src/models/response/response";
 
 class ProductsService {
   getAll = async (): Promise<GetAllDto<ProductModel>> => {
     const query = await productsRepository.getAll();
-    const { details, data: allProducs } = query;
-    return new GetAllDto(allProducs, [details]);
+    const { details, data: allProducts } = query;
+    return new GetAllDto(allProducts, [details]);
   };
   getById = async (id: number): Promise<GetOneDto<ProductDetails>> => {
     const response = await productsRepository.getById(id);

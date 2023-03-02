@@ -47,7 +47,7 @@ export class EmployeesRepository extends BaseRepository {
         homePhone: employees.homePhone,
         extension: employees.extension,
         notes: employees.notes,
-        reportsTo: employees.reportsTo,
+        reportsToId: employees.reportsTo,
         id: employees.employeeId,
       })
       .from(employees)
@@ -66,6 +66,6 @@ export class EmployeesRepository extends BaseRepository {
   };
 }
 
-const emplyeesRepository = new EmployeesRepository(employees);
+const employeesRepository = new EmployeesRepository(employees);
 
-export default emplyeesRepository;
+export default employeesRepository;

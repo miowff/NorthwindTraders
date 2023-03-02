@@ -1,10 +1,10 @@
-import { GetOneDto } from "src/models/response/responce";
+import { GetOneDto } from "src/models/response/response";
 import { ServicesError } from "src/errors/servicesError";
 import customersRepository from "src/db/repositories/customersRepository";
-import { CustomerModel } from "src/models/cusomer-models/customer";
+import { CustomerModel } from "src/models/customer-models/customer";
 import { GetAllDto } from "src/models/response/getAllResponse";
-import { SearchResultCustomer } from "src/models/cusomer-models/searchResultCustomer";
-import { CustomerDetails } from "src/models/cusomer-models/customerDetails";
+import { SearchResultCustomer } from "src/models/customer-models/searchResultCustomer";
+import { CustomerDetails } from "src/models/customer-models/customerDetails";
 
 class CustomersService {
   getAll = async (): Promise<GetAllDto<CustomerModel>> => {
