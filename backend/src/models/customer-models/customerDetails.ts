@@ -7,7 +7,7 @@ export interface CustomerDetails {
   customerId: string;
   address: string;
   postalCode: string;
-  region: string;
+  region: string | null;
   phone: string;
   fax: string;
 }

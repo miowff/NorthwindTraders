@@ -21,13 +21,17 @@ class EmployeesService {
     const reportsToResponse = await employeesRepository.getById(
       employee.reportsToId
     );
+    const employeeModel: EmployeeDetails = Object.assign(
+      { reportsTo: undefined },
+      employee
+    );
     const { details: getEmployeeHead, data: reportsTo } = reportsToResponse;
     if (reportsTo) {
       const { id, name } = reportsTo;
       const employeeHead: EmployeeHead = { id: id, name: name };
-      employee.reportsTo = employeeHead;
+      employeeModel.reportsTo = employeeHead;
     }
-    return new GetOneDto(employee, [getEmployee, getEmployeeHead]);
+    return new GetOneDto(employeeModel, [getEmployee, getEmployeeHead]);
   };
 }
 

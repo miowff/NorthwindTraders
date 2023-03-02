@@ -2,9 +2,9 @@ import { sql } from "drizzle-orm";
 import { eq } from "drizzle-orm/expressions";
 import { DatabaseResponse } from "src/models/dbResponse";
 import { OrderModel } from "src/models/order-models/order";
-import { OrderDetails } from "src/models/order-models/orderDetails";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
+import { Order } from "../entities/order";
 import { orderDetails } from "../schema/orderDetail";
 import { orders } from "../schema/orders";
 import { shippers } from "../schema/shippers";
@@ -39,7 +39,7 @@ class OrdersRepository extends BaseRepository {
       data: allOrders,
     };
   };
-  getById = async (value: number): Promise<DatabaseResponse<OrderDetails>> => {
+  getById = async (value: number): Promise<DatabaseResponse<Order>> => {
     const query = this.db
       .select({
         customerId: orders.customerId,

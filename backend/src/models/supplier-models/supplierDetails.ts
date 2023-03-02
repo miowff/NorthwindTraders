@@ -8,4 +8,6 @@ export interface SupplierDetails {
   address: string;
   postalCode: string;
   phone: string;
+  fax: string | null;
+  homePage: string | null;
 }

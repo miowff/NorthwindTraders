@@ -2,9 +2,9 @@ import { sql } from "drizzle-orm";
 import { eq } from "drizzle-orm/expressions";
 import { DatabaseResponse } from "src/models/dbResponse";
 import { EmployeeModel } from "src/models/employees-models/employee";
-import { EmployeeDetails } from "src/models/employees-models/employeeDetails";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
+import { Employee } from "../entities/employee";
 import { employees } from "../schema/employees";
 import { BaseRepository } from "./baseRepository";
 
@@ -32,7 +32,7 @@ export class EmployeesRepository extends BaseRepository {
       data: allEmployees,
     };
   };
-  getById = async (id: number): Promise<DatabaseResponse<EmployeeDetails>> => {
+  getById = async (id: number): Promise<DatabaseResponse<Employee>> => {
     const query = this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),

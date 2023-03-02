@@ -21,30 +21,14 @@ class OrdersService {
     const productsInOrderResponse = await productsRepository.productsInOrder(
       id
     );
+
     const { details: productsInOrderDetails, data: productsInOrder } =
       productsInOrderResponse;
-    const orderInfo: OrderDetails = {
-      id: id,
-      customerId: order.customerId,
-      shipName: order.shipName,
-      totalProducts: order.totalProducts,
-      totalQuantity: order.totalQuantity,
-      totalPrice: order.totalPrice,
-      totalDiscount: order.totalDiscount,
-      shipVia: order.shipVia,
-      freight: order.freight,
-      orderDate: order.orderDate,
-      requiredDate: order.requiredDate,
-      shippedDate: order.shippedDate,
-      shipCity: order.shipCity,
-      shipPostalCode: order.shipPostalCode,
-      shipCountry: order.shipCountry,
-      productsInOrder: productsInOrder,
-    };
-    return new GetOneDto(orderInfo, [
-      orderByIdDetails,
-      productsInOrderDetails,
-    ]);
+    const orderInfo: OrderDetails = Object.assign(
+      { productsInOrder: productsInOrder },
+      order
+    );
+    return new GetOneDto(orderInfo, [orderByIdDetails, productsInOrderDetails]);
   };
 }
 
