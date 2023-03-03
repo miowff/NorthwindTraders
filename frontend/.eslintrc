@@ -1,0 +1,47 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "react",
+    "react-hooks",
+    "simple-import-sort"
+  ],
+  "extends": [
+    "airbnb-typescript"
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "arrow-body-style": ["off"],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["webpack.config.ts"] }],
+    "import/extensions": ["off"],
+    "@typescript-eslint/no-use-before-define": ["error", { "variables": false }],
+    "react/prop-types": ["off"],
+    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "no-confusing-arrow": [
+      "off"
+    ],
+    "react/jsx-props-no-spreading": [
+      "off"
+    ],
+    "react/no-array-index-key": [
+      "off"
+    ],
+    "react/function-component-definition": [
+      "off"
+    ]
+  }
+}

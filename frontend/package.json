@@ -1,0 +1,53 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.tsx",
+  "scripts": {
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "dev": "npx webpack serve --mode development"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "17.0.5",
+    "@types/react-dom": "18.0.11",
+    "@types/styled-components": "5.1.26",
+    "@typescript-eslint/eslint-plugin": "5.13.0",
+    "@typescript-eslint/parser": "5.0.0",
+    "eslint": "8.22.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-typescript": "17.0.0",
+    "eslint-import-resolver-typescript": "3.5.3",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "eslint-plugin-simple-import-sort": "10.0.0",
+    "html-webpack-plugin": "5.5.0",
+    "path": "0.12.7",
+    "ts-loader": "9.4.2",
+    "tsconfig-paths-webpack-plugin": "4.0.0",
+    "typescript": "4.9.5",
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.1",
+    "webpack-dev-server": "4.11.1"
+  },
+  "dependencies": {
+    "@mui/icons-material": "5.11.9",
+    "@mui/material": "^5.11.10",
+    "@mui/styled-engine-sc": "^5.11.9",
+    "@reduxjs/toolkit": "1.9.3",
+    "@tanstack/react-query": "4.24.10",
+    "axios": "1.3.4",
+    "moment": "2.29.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "8.0.5",
+    "react-router": "6.8.1",
+    "react-router-dom": "6.8.1",
+    "redux": "4.2.1",
+    "styled-components": "5.3.6",
+    "styled-normalize": "8.0.7"
+  }
+}
