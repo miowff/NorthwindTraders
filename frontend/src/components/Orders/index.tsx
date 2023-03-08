@@ -26,11 +26,11 @@ const columns: Columns<OrderModel> = [
   },
   {
     field: 'Products',
-    renderCell: ({ totalProducts }) => totalProducts,
+    renderCell: ({ totalQuantity }) => totalQuantity,
   },
   {
     field: 'Quantity',
-    renderCell: ({ totalQuantity }) => totalQuantity,
+    renderCell: ({ totalProducts }) => totalProducts ,
   },
   {
     field: 'Shipped',

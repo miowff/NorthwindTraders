@@ -26,7 +26,7 @@ const columns: Columns<SupplierModel> = [
   },
   {
     field: 'Contact',
-    renderCell: ({ contactName, contactTitle }) => `${contactName} ${contactTitle}`,
+    renderCell: ({ contactName}) => `${contactName} `,
   },
   {
     field: 'Title',
