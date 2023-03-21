@@ -24,10 +24,11 @@ export const handler = async (
         body: JSON.stringify(customer),
       };
     }
+    const customers = await customersService.getAll();
     return {
-      statusCode: 400,
+      statusCode: 200,
       headers: HEADERS,
-      body: JSON.stringify(`Bad request`),
+      body: JSON.stringify(customers),
     };
   } catch (err) {
     return {

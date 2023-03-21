@@ -2,7 +2,7 @@ import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
 } from "aws-lambda/trigger/api-gateway-proxy";
-import ordersService from "src/services/ordersService";
+import suppliersService from "src/services/suppliersService";
 import { HEADERS } from "../headers";
 
 export const handler = async (
@@ -12,23 +12,19 @@ export const handler = async (
     if (event.queryStringParameters) {
       const id = event.queryStringParameters["id"];
       if (id) {
-        const order = await ordersService.getById(+id);
+        const supplier = await suppliersService.getById(+id);
         return {
           statusCode: 200,
           headers: HEADERS,
-          body: JSON.stringify(order),
+          body: JSON.stringify(supplier),
         };
       }
-      return {
-        statusCode: 400,
-        headers: HEADERS,
-        body: JSON.stringify(`Bad request`),
-      };
     }
+    const suppliers = await suppliersService.getAll();
     return {
-      statusCode: 400,
+      statusCode: 200,
       headers: HEADERS,
-      body: JSON.stringify(`Bad request`),
+      body: JSON.stringify(suppliers),
     };
   } catch (err) {
     return {

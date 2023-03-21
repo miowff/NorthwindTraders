@@ -1,71 +1,36 @@
-getAllSuppliers:
-  handler: src/lambdas/suppliers/getAllSuppliers.handler
+Suppliers:
+  handler: src/lambdas/suppliers/get.handler
   events:
     - http:
         path: suppliers
         method: get
         cors: true
-getAllProducts:
-  handler: src/lambdas/products/getAllProducts.handler
+Products:
+  handler: src/lambdas/products/get.handler
   events:
     - http:
         path: products
         method: get
         cors: true
-getAllEmployees:
-  handler: src/lambdas/employees/getAllEmployees.handler
+Employees:
+  handler: src/lambdas/employees/get.handler
   events:
     - http:
         path: employees
         method: get
         cors: true
-getAllCustomers:
-  handler: src/lambdas/customers/getAllCustomers.handler
+Customers:
+  handler: src/lambdas/customers/get.handler
   events:
     - http:
         path: customers
         method: get
         cors: true
-getAllOrders:
-  handler: src/lambdas/orders/getAllOrders.handler
+Orders:
+  handler: src/lambdas/orders/get.handler
   events:
     - http:
         path: orders
-        method: get
-        cors: true
-getSupplierById:
-  handler: src/lambdas/suppliers/getSupplierById.handler
-  events:
-    - http:
-        path: supplier
-        method: get
-        cors: true
-getCustomerById:
-  handler: src/lambdas/customers/getCustomerById.handler
-  events:
-    - http:
-        path: customer
-        method: get
-        cors: true
-getProductById:
-  handler: src/lambdas/products/getProductById.handler
-  events:
-    - http:
-        path: product
-        method: get
-        cors: true
-getOrderById:
-  handler: src/lambdas/orders/getOrderById.handler
-  events:
-    - http:
-        path: order
-        method: get
-        cors: true
-getEmployeeById:
-  handler: src/lambdas/employees/getEmployeeById.handler
-  events:
-    - http:
-        path: employee
         method: get
         cors: true
 searchObjects:
