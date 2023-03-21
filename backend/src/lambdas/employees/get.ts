@@ -3,7 +3,7 @@ import {
   APIGatewayProxyResult,
 } from "aws-lambda/trigger/api-gateway-proxy";
 import employeesService from "src/services/employeesService";
-import { HEADERS } from "../headers";
+import responseCreator from "src/services/responseCreator";
 
 export const handler = async (
   event: APIGatewayProxyEvent
@@ -13,24 +13,12 @@ export const handler = async (
       const id = event.queryStringParameters["id"];
       if (id) {
         const employee = await employeesService.getById(+id);
-        return {
-          statusCode: 200,
-          headers: HEADERS,
-          body: JSON.stringify(employee),
-        };
+        return responseCreator(200, JSON.stringify(employee));
       }
     }
     const employees = await employeesService.getAll();
-    return {
-      statusCode: 200,
-      headers: HEADERS,
-      body: JSON.stringify(employees),
-    };
+    return responseCreator(200, JSON.stringify(employees));
   } catch (err) {
-    return {
-      statusCode: 400,
-      headers: HEADERS,
-      body: JSON.stringify(`Bad request: ${err}`),
-    };
+    return responseCreator(400, JSON.stringify(err), err);
   }
 };
