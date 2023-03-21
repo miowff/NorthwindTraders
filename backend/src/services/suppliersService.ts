@@ -2,8 +2,7 @@ import suppliersRepository from "src/db/repositories/suppliersRepository";
 import { ServicesError } from "src/errors/servicesError";
 import { GetAllDto } from "src/models/response/getAllResponse";
 import { GetOneDto } from "src/models/response/response";
-import { SupplierModel } from "src/models/supplier-models/supplier";
-import { SupplierDetails } from "src/models/supplier-models/supplierDetails";
+import { SupplierDetails, SupplierModel } from "src/models/suppliers";
 
 class SuppliersService {
   getAll = async (): Promise<GetAllDto<SupplierModel>> => {

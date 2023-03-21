@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { eq } from "drizzle-orm/expressions";
 import { DatabaseResponse } from "src/models/dbResponse";
-import { EmployeeModel } from "src/models/employees-models/employee";
+import { EmployeeModel } from "src/models/employees";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
 import { Employee } from "../entities/employee";

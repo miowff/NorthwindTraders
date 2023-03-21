@@ -1,6 +1,12 @@
-import { EmployeeHead } from "./employeeHead";
-
-export interface EmployeeDetails {
+export interface EmployeeModel {
+  name: string;
+  title: string;
+  city: string;
+  phone: string;
+  country: string;
+  id: number;
+}
+export interface EmployeeDetails extends Omit<EmployeeModel, "phone"> {
   name: string;
   title: string;
   city: string;
@@ -15,4 +21,9 @@ export interface EmployeeDetails {
   extension: string;
   notes: string;
   reportsTo: EmployeeHead | null;
+}
+
+export interface EmployeeHead {
+  id: number;
+  name: string;
 }

@@ -1,8 +1,10 @@
 import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
-import { ProductModel } from "src/models/product-models/product";
-import { ProductDetails } from "src/models/product-models/productDetails";
-import { SearchResultProduct } from "src/models/product-models/searchResultProduct";
+import {
+  ProductDetails,
+  ProductModel,
+  SearchResultProduct,
+} from "src/models/products";
 import { GetAllDto } from "src/models/response/getAllResponse";
 import { GetOneDto } from "src/models/response/response";
 

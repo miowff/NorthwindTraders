@@ -1,8 +1,6 @@
 import employeesRepository from "src/db/repositories/employeesRepository";
 import { ServicesError } from "src/errors/servicesError";
-import { EmployeeModel } from "src/models/employees-models/employee";
-import { EmployeeDetails } from "src/models/employees-models/employeeDetails";
-import { EmployeeHead } from "src/models/employees-models/employeeHead";
+import { EmployeeDetails, EmployeeHead, EmployeeModel } from "src/models/employees";
 import { GetAllDto } from "src/models/response/getAllResponse";
 import { GetOneDto } from "src/models/response/response";
 

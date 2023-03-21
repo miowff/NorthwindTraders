@@ -1,7 +1,5 @@
 import { sql } from "drizzle-orm";
 import { eq, like } from "drizzle-orm/expressions";
-import { ProductInOrder } from "src/models/product-models/productInOrder";
-import { ProductModel } from "src/models/product-models/product";
 import { orderDetails } from "../schema/orderDetail";
 import { products } from "../schema/products";
 import { suppliers } from "../schema/suppliers";
@@ -9,8 +7,12 @@ import { BaseRepository } from "./baseRepository";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
 import { DatabaseResponse } from "src/models/dbResponse";
-import { ProductDetails } from "src/models/product-models/productDetails";
-import { SearchResultProduct } from "src/models/product-models/searchResultProduct";
+import {
+  ProductDetails,
+  ProductInOrder,
+  ProductModel,
+  SearchResultProduct,
+} from "src/models/products";
 
 class ProductsRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<ProductModel[]>> => {

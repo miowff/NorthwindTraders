@@ -1,6 +1,7 @@
-import { ProductInOrder } from "../product-models/productInOrder";
+import { ProductInOrder } from "./products";
 
-export interface OrderDetails {
+
+export interface OrderModel {
   id: number;
   totalPrice: number;
   totalProducts: number;
@@ -9,6 +10,9 @@ export interface OrderDetails {
   shipName: string;
   shipCity: string;
   shipCountry: string;
+}
+
+export interface OrderDetails extends OrderModel {
   customerId: string;
   totalDiscount: number;
   shipVia: string | null;

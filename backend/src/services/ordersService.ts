@@ -1,8 +1,7 @@
 import ordersRepository from "src/db/repositories/ordersRepository";
 import productsRepository from "src/db/repositories/productsRepository";
 import { ServicesError } from "src/errors/servicesError";
-import { OrderModel } from "src/models/order-models/order";
-import { OrderDetails } from "src/models/order-models/orderDetails";
+import { OrderDetails, OrderModel } from "src/models/orders";
 import { GetAllDto } from "src/models/response/getAllResponse";
 import { GetOneDto } from "src/models/response/response";
 

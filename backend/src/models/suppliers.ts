@@ -1,13 +1,16 @@
-export interface CustomerDetails {
+export interface SupplierModel {
   companyName: string;
   contactName: string;
   contactTitle: string;
   city: string;
   country: string;
-  customerId: string;
+  supplierId: number;
+}
+
+export interface SupplierDetails extends SupplierModel {
   address: string;
   postalCode: string;
-  region: string | null;
   phone: string;
-  fax: string;
+  fax: string | null;
+  homePage: string | null;
 }

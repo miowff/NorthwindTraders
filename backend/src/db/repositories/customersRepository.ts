@@ -1,7 +1,9 @@
 import { eq, like } from "drizzle-orm/expressions";
-import { CustomerModel } from "src/models/customer-models/customer";
-import { CustomerDetails } from "src/models/customer-models/customerDetails";
-import { SearchResultCustomer } from "src/models/customer-models/searchResultCustomer";
+import {
+  CustomerDetails,
+  CustomerModel,
+  SearchResultCustomer,
+} from "src/models/customers";
 import { DatabaseResponse } from "src/models/dbResponse";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";

@@ -1,8 +1,7 @@
 import { eq } from "drizzle-orm/expressions";
 import { DatabaseResponse } from "src/models/dbResponse";
 import { ResponseDetails } from "src/models/response/responseDetails";
-import { SupplierModel } from "src/models/supplier-models/supplier";
-import { SupplierDetails } from "src/models/supplier-models/supplierDetails";
+import { SupplierDetails, SupplierModel } from "src/models/suppliers";
 import { OperationsTypes } from "src/operationTypes";
 import { suppliers } from "../schema/suppliers";
 import { BaseRepository } from "./baseRepository";
