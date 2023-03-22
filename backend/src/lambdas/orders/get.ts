@@ -3,7 +3,7 @@ import {
   APIGatewayProxyResult,
 } from "aws-lambda/trigger/api-gateway-proxy";
 import ordersService from "src/services/ordersService";
-import responseCreator from "src/services/responseCreator";
+import responseCreator from "src/services/utils/responseCreator";
 
 export const handler = async (
   event: APIGatewayProxyEvent

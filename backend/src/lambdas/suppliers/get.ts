@@ -2,7 +2,7 @@ import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
 } from "aws-lambda/trigger/api-gateway-proxy";
-import responseCreator from "src/services/responseCreator";
+import responseCreator from "src/services/utils/responseCreator";
 import suppliersService from "src/services/suppliersService";
 
 export const handler = async (
