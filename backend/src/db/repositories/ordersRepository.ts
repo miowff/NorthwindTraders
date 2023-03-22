@@ -4,6 +4,7 @@ import { DatabaseResponse } from "src/models/dbResponse";
 import { OrderModel } from "src/models/orders";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
+import timer from "src/services/utils/timer";
 import { Order } from "../entities/order";
 import { orderDetails } from "../schema/orderDetail";
 import { orders } from "../schema/orders";
@@ -13,6 +14,7 @@ import { BaseRepository } from "./baseRepository";
 class OrdersRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<OrderModel[]>> => {
     const { shippedDate, orderId, shipName, shipCity, shipCountry } = orders;
+    timer.start();
     const query = this.db
       .select({
         totalPrice:
@@ -35,7 +37,8 @@ class OrdersRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT_LEFT_JOIN,
         1,
-        sqlQuery.sql
+        sqlQuery.sql,
+        timer.getDifference()
       ),
       data: allOrders,
     };
@@ -53,6 +56,7 @@ class OrdersRepository extends BaseRepository {
       shipPostalCode,
       orderId,
     } = orders;
+    timer.start();
     const query = this.db
       .select({
         customerId,
@@ -84,7 +88,8 @@ class OrdersRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT_LEFT_JOIN,
         1,
-        sqlQuery.sql
+        sqlQuery.sql,
+        timer.getDifference()
       ),
       data: order[0],
     };

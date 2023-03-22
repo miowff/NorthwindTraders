@@ -17,4 +17,7 @@ export class ServicesError extends Error {
   static SupplierNotFound(id: any) {
     return new ServicesError(`There is no supplier with id:${id}`);
   }
+  static TimerError(description: string) {
+    return new ServicesError(`Timer error:${description}`);
+  }
 }

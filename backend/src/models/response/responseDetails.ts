@@ -3,6 +3,7 @@ export class ResponseDetails {
     public time: Date,
     public operation: string,
     public count: number,
-    public description: string
+    public description: string,
+    public executionTime: string
   ) {}
 }

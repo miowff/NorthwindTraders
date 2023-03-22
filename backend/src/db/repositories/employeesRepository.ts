@@ -4,6 +4,7 @@ import { DatabaseResponse } from "src/models/dbResponse";
 import { EmployeeModel } from "src/models/employees";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
+import timer from "src/services/utils/timer";
 import { Employee } from "../entities/employee";
 import { employees } from "../schema/employees";
 import { BaseRepository } from "./baseRepository";
@@ -11,6 +12,7 @@ import { BaseRepository } from "./baseRepository";
 export class EmployeesRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<EmployeeModel[]>> => {
     const { title, city, homePhone, country, employeeId } = employees;
+    timer.start();
     const query = this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
@@ -28,7 +30,8 @@ export class EmployeesRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT,
         allEmployees.length,
-        sqlQuery.sql
+        sqlQuery.sql,
+        timer.getDifference()
       ),
       data: allEmployees,
     };
@@ -49,6 +52,7 @@ export class EmployeesRepository extends BaseRepository {
       reportsTo,
       employeeId,
     } = employees;
+    timer.start();
     const query = this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
@@ -75,7 +79,8 @@ export class EmployeesRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT,
         1,
-        sqlQuery.sql
+        sqlQuery.sql,
+        timer.getDifference()
       ),
       data: employee[0],
     };

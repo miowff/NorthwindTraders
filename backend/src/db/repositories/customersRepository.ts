@@ -7,6 +7,7 @@ import {
 import { DatabaseResponse } from "src/models/dbResponse";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { OperationsTypes } from "src/operationTypes";
+import timer from "src/services/utils/timer";
 import { customers } from "../schema/customers";
 import { BaseRepository } from "./baseRepository";
 
@@ -20,6 +21,7 @@ class CustomersRepository extends BaseRepository {
       country,
       customerId,
     } = customers;
+    timer.start();
     const query = this.db
       .select({
         companyName,
@@ -37,12 +39,14 @@ class CustomersRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT,
         allCustomers.length,
-        sql.sql
+        sql.sql,
+        timer.getDifference()
       ),
       data: allCustomers,
     };
   };
   getById = async (id: string): Promise<DatabaseResponse<CustomerDetails>> => {
+    timer.start();
     const query = this.db
       .select()
       .from(customers)
@@ -54,7 +58,8 @@ class CustomersRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT_WHERE,
         1,
-        sql.sql
+        sql.sql,
+        timer.getDifference()
       ),
       data: customer[0],
     };
@@ -64,6 +69,7 @@ class CustomersRepository extends BaseRepository {
   ): Promise<DatabaseResponse<SearchResultCustomer[]>> => {
     const { companyName, contactName, contactTitle, phone, customerId } =
       customers;
+    timer.start();
     const query = this.db
       .select({
         companyName,
@@ -81,7 +87,8 @@ class CustomersRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT_WHERE,
         suitableCustomers.length,
-        sql.sql
+        sql.sql,
+        timer.getDifference()
       ),
       data: suitableCustomers,
     };

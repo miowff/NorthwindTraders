@@ -3,6 +3,7 @@ import { DatabaseResponse } from "src/models/dbResponse";
 import { ResponseDetails } from "src/models/response/responseDetails";
 import { SupplierDetails, SupplierModel } from "src/models/suppliers";
 import { OperationsTypes } from "src/operationTypes";
+import timer from "src/services/utils/timer";
 import { suppliers } from "../schema/suppliers";
 import { BaseRepository } from "./baseRepository";
 
@@ -16,6 +17,7 @@ class SuppliersRepository extends BaseRepository {
       country,
       supplierId,
     } = suppliers;
+    timer.start();
     const query = this.db
       .select({
         companyName,
@@ -33,12 +35,14 @@ class SuppliersRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT,
         allSuppliers.length,
-        sql.sql
+        sql.sql,
+        timer.getDifference()
       ),
       data: allSuppliers,
     };
   };
   getById = async (id: number): Promise<DatabaseResponse<SupplierDetails>> => {
+    timer.start();
     const query = this.db
       .select()
       .from(suppliers)
@@ -50,7 +54,8 @@ class SuppliersRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT,
         1,
-        sql.sql
+        sql.sql,
+        timer.getDifference()
       ),
       data: supplier[0],
     };

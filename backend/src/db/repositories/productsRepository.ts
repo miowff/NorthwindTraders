@@ -13,6 +13,7 @@ import {
   ProductModel,
   SearchResultProduct,
 } from "src/models/products";
+import timer from "src/services/utils/timer";
 
 class ProductsRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<ProductModel[]>> => {
@@ -24,6 +25,7 @@ class ProductsRepository extends BaseRepository {
       unitsOnOrder,
       productId,
     } = products;
+    timer.start();
     const query = this.db
       .select({
         name: productName,
@@ -41,7 +43,8 @@ class ProductsRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT,
         allProducts.length,
-        sql.sql
+        sql.sql,
+        timer.getDifference()
       ),
       data: allProducts,
     };
@@ -57,6 +60,7 @@ class ProductsRepository extends BaseRepository {
       reorderLevel,
       discontinued,
     } = products;
+    timer.start();
     const query = this.db
       .select({
         name: productName,
@@ -80,7 +84,8 @@ class ProductsRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT_LEFT_JOIN,
         1,
-        sqlQuery.sql
+        sqlQuery.sql,
+        timer.getDifference()
       ),
       data: product[0],
     };
@@ -90,6 +95,7 @@ class ProductsRepository extends BaseRepository {
   ): Promise<DatabaseResponse<SearchResultProduct[]>> => {
     const { productName, quantityPerUnit, unitPrice, unitsInStock, productId } =
       products;
+    timer.start();
     const query = this.db
       .select({
         name: productName,
@@ -107,7 +113,8 @@ class ProductsRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT_WHERE,
         suitableProducts.length,
-        sqlQuery.sql
+        sqlQuery.sql,
+        timer.getDifference()
       ),
       data: suitableProducts,
     };
@@ -117,6 +124,7 @@ class ProductsRepository extends BaseRepository {
   ): Promise<DatabaseResponse<ProductInOrder[]>> => {
     const { productId, productName } = products;
     const { unitPrice, quantity, discount } = orderDetails;
+    timer.start();
     const query = this.db
       .select({
         productId,
@@ -136,7 +144,8 @@ class ProductsRepository extends BaseRepository {
         new Date(),
         OperationsTypes.SELECT_LEFT_JOIN,
         productsInOrder.length,
-        sqlQuery.sql
+        sqlQuery.sql,
+        timer.getDifference()
       ),
       data: productsInOrder,
     };
