@@ -12,17 +12,18 @@ import { BaseRepository } from "./baseRepository";
 
 class OrdersRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<OrderModel[]>> => {
+    const { shippedDate, orderId, shipName, shipCity, shipCountry } = orders;
     const query = this.db
       .select({
         totalPrice:
           sql`ROUND(SUM(${orderDetails.unitPrice} * ${orderDetails.quantity}),3)`.as<number>(),
         totalProducts: sql`SUM(${orderDetails.quantity})`.as<number>(),
         totalQuantity: sql`COUNT(${orderDetails.orderId})`.as<number>(),
-        id: orders.orderId,
-        shippedDate: orders.shippedDate,
-        shipName: orders.shipName,
-        shipCity: orders.shipCity,
-        shipCountry: orders.shipCountry,
+        id: orderId,
+        shippedDate,
+        shipName,
+        shipCity,
+        shipCountry,
       })
       .from(orders)
       .leftJoin(orderDetails, eq(orderDetails.orderId, orders.orderId))
@@ -40,10 +41,22 @@ class OrdersRepository extends BaseRepository {
     };
   };
   getById = async (value: number): Promise<DatabaseResponse<Order>> => {
+    const {
+      customerId,
+      shipName,
+      freight,
+      orderDate,
+      requiredDate,
+      shippedDate,
+      shipCity,
+      shipCountry,
+      shipPostalCode,
+      orderId,
+    } = orders;
     const query = this.db
       .select({
-        customerId: orders.customerId,
-        shipName: orders.shipName,
+        customerId,
+        shipName,
         totalProducts: sql`COUNT(${orderDetails.orderId})`.as<number>(),
         totalQuantity: sql`SUM(${orderDetails.quantity})`.as<number>(),
         totalPrice:
@@ -51,14 +64,14 @@ class OrdersRepository extends BaseRepository {
         totalDiscount:
           sql`ROUND(SUM(${orderDetails.unitPrice}*${orderDetails.quantity}*${orderDetails.discount}),3)`.as<number>(),
         shipVia: shippers.companyName,
-        freight: orders.freight,
-        orderDate: orders.orderDate,
-        requiredDate: orders.requiredDate,
-        shippedDate: orders.shippedDate,
-        shipCity: orders.shipCity,
-        shipPostalCode: orders.shipPostalCode,
-        shipCountry: orders.shipCountry,
-        id: orders.orderId,
+        freight,
+        orderDate,
+        requiredDate,
+        shippedDate,
+        shipCity,
+        shipPostalCode,
+        shipCountry,
+        id: orderId,
       })
       .from(orders)
       .leftJoin(shippers, eq(shippers.shipperId, orders.shipVia))

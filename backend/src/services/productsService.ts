@@ -10,13 +10,11 @@ import { GetOneDto } from "src/models/response/response";
 
 class ProductsService {
   getAll = async (): Promise<GetAllDto<ProductModel>> => {
-    const query = await productsRepository.getAll();
-    const { details, data: allProducts } = query;
+    const { details, data: allProducts } = await productsRepository.getAll();
     return new GetAllDto(allProducts, [details]);
   };
   getById = async (id: number): Promise<GetOneDto<ProductDetails>> => {
-    const response = await productsRepository.getById(id);
-    const { details, data: product } = response;
+    const { details, data: product } = await productsRepository.getById(id);
     if (!product) {
       throw ServicesError.ProductNotFound(id);
     }
@@ -25,8 +23,9 @@ class ProductsService {
   search = async (
     searchString: string
   ): Promise<GetAllDto<SearchResultProduct>> => {
-    const response = await productsRepository.find(searchString);
-    const { details, data: suitableProducts } = response;
+    const { details, data: suitableProducts } = await productsRepository.find(
+      searchString
+    );
     return new GetAllDto(suitableProducts, [details]);
   };
 }

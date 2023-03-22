@@ -16,14 +16,22 @@ import {
 
 class ProductsRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<ProductModel[]>> => {
+    const {
+      productName,
+      quantityPerUnit,
+      unitPrice,
+      unitsInStock,
+      unitsOnOrder,
+      productId,
+    } = products;
     const query = this.db
       .select({
-        name: products.productName,
-        quantityPerUnit: products.quantityPerUnit,
-        price: products.unitPrice,
-        stock: products.unitsInStock,
-        orders: products.unitsOnOrder,
-        id: products.productId,
+        name: productName,
+        quantityPerUnit,
+        price: unitPrice,
+        stock: unitsInStock,
+        orders: unitsOnOrder,
+        id: productId,
       })
       .from(products);
     const sql = query.toSQL();
@@ -39,18 +47,28 @@ class ProductsRepository extends BaseRepository {
     };
   };
   getById = async (id: number): Promise<DatabaseResponse<ProductDetails>> => {
+    const {
+      productName,
+      quantityPerUnit,
+      unitPrice,
+      unitsInStock,
+      unitsOnOrder,
+      productId,
+      reorderLevel,
+      discontinued,
+    } = products;
     const query = this.db
       .select({
-        name: products.productName,
-        quantityPerUnit: products.quantityPerUnit,
-        price: products.unitPrice,
-        stock: products.unitsInStock,
-        unitsInOrder: products.unitsOnOrder,
-        id: products.productId,
+        name: productName,
+        quantityPerUnit,
+        price: unitPrice,
+        stock: unitsInStock,
+        unitsInOrder: unitsOnOrder,
+        id: productId,
         supplier: suppliers.companyName,
         supplierId: suppliers.supplierId,
-        reorderLevel: products.reorderLevel,
-        discontinued: products.discontinued,
+        reorderLevel,
+        discontinued,
       })
       .from(products)
       .leftJoin(suppliers, eq(suppliers.supplierId, products.supplierId))
@@ -70,13 +88,15 @@ class ProductsRepository extends BaseRepository {
   find = async (
     searchString: string
   ): Promise<DatabaseResponse<SearchResultProduct[]>> => {
+    const { productName, quantityPerUnit, unitPrice, unitsInStock, productId } =
+      products;
     const query = this.db
       .select({
-        name: products.productName,
-        quantityPerUnit: products.quantityPerUnit,
-        price: products.unitPrice,
-        stock: products.unitsInStock,
-        id: products.productId,
+        name: productName,
+        quantityPerUnit,
+        price: unitPrice,
+        stock: unitsInStock,
+        id: productId,
       })
       .from(products)
       .where(like(products.productName, `%${searchString}%`));
@@ -95,15 +115,16 @@ class ProductsRepository extends BaseRepository {
   productsInOrder = async (
     orderId: number
   ): Promise<DatabaseResponse<ProductInOrder[]>> => {
+    const { productId, productName } = products;
+    const { unitPrice, quantity, discount } = orderDetails;
     const query = this.db
       .select({
-        productId: products.productId,
-        productName: products.productName,
-        orderPrice: orderDetails.unitPrice,
-        quantity: orderDetails.quantity,
-        discount: sql`ROUND(${orderDetails.discount} * 100,2)`.as<number>(),
-        totalPrice:
-          sql`ROUND(${orderDetails.unitPrice} * ${orderDetails.quantity},2)`.as<number>(),
+        productId,
+        productName,
+        orderPrice: unitPrice,
+        quantity: quantity,
+        discount: sql`ROUND(${discount} * 100,2)`.as<number>(),
+        totalPrice: sql`ROUND(${unitPrice} * ${quantity},2)`.as<number>(),
       })
       .from(orderDetails)
       .leftJoin(products, eq(products.productId, orderDetails.productId))

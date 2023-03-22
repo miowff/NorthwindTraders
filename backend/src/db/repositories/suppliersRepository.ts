@@ -8,14 +8,22 @@ import { BaseRepository } from "./baseRepository";
 
 class SuppliersRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<SupplierModel[]>> => {
+    const {
+      companyName,
+      contactName,
+      contactTitle,
+      city,
+      country,
+      supplierId,
+    } = suppliers;
     const query = this.db
       .select({
-        companyName: suppliers.companyName,
-        contactName: suppliers.contactName,
-        contactTitle: suppliers.contactTitle,
-        city: suppliers.city,
-        country: suppliers.country,
-        supplierId: suppliers.supplierId,
+        companyName,
+        contactName,
+        contactTitle,
+        city,
+        country,
+        supplierId,
       })
       .from(this.table);
     const sql = query.toSQL();

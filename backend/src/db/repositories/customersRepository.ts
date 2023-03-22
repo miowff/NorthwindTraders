@@ -12,14 +12,22 @@ import { BaseRepository } from "./baseRepository";
 
 class CustomersRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<CustomerModel[]>> => {
+    const {
+      companyName,
+      contactName,
+      contactTitle,
+      city,
+      country,
+      customerId,
+    } = customers;
     const query = this.db
       .select({
-        companyName: customers.companyName,
-        contactName: customers.contactName,
-        contactTitle: customers.contactTitle,
-        city: customers.city,
-        country: customers.country,
-        customerId: customers.customerId,
+        companyName,
+        contactName,
+        contactTitle,
+        city,
+        country,
+        customerId,
       })
       .from(customers);
     const sql = query.toSQL();
@@ -54,13 +62,15 @@ class CustomersRepository extends BaseRepository {
   find = async (
     searchString: string
   ): Promise<DatabaseResponse<SearchResultCustomer[]>> => {
+    const { companyName, contactName, contactTitle, phone, customerId } =
+      customers;
     const query = this.db
       .select({
-        companyName: customers.companyName,
-        contactName: customers.contactName,
-        contactTitle: customers.contactTitle,
-        phone: customers.phone,
-        customerId: customers.customerId,
+        companyName,
+        contactName,
+        contactTitle,
+        phone,
+        customerId,
       })
       .from(customers)
       .where(like(customers.companyName, `%${searchString}%`));

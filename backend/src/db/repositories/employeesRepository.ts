@@ -10,14 +10,15 @@ import { BaseRepository } from "./baseRepository";
 
 export class EmployeesRepository extends BaseRepository {
   getAll = async (): Promise<DatabaseResponse<EmployeeModel[]>> => {
+    const { title, city, homePhone, country, employeeId } = employees;
     const query = this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
-        title: employees.title,
-        city: employees.city,
-        phone: employees.homePhone,
-        country: employees.country,
-        id: employees.employeeId,
+        title,
+        city,
+        phone: homePhone,
+        country,
+        id: employeeId,
       })
       .from(this.table);
     const sqlQuery = query.toSQL();
@@ -33,22 +34,37 @@ export class EmployeesRepository extends BaseRepository {
     };
   };
   getById = async (id: number): Promise<DatabaseResponse<Employee>> => {
+    const {
+      title,
+      titleOfCourtesy,
+      birthDate,
+      hireDate,
+      address,
+      city,
+      postalCode,
+      country,
+      homePhone,
+      extension,
+      notes,
+      reportsTo,
+      employeeId,
+    } = employees;
     const query = this.db
       .select({
         name: sql`CONCAT(${employees.firstName},' ',${employees.lastName} )`.as<string>(),
-        title: employees.title,
-        titleOfCourtesy: employees.titleOfCourtesy,
-        birthDate: employees.birthDate,
-        hireDate: employees.hireDate,
-        address: employees.address,
-        city: employees.city,
-        postalCode: employees.postalCode,
-        country: employees.country,
-        homePhone: employees.homePhone,
-        extension: employees.extension,
-        notes: employees.notes,
-        reportsTo: employees.reportsTo,
-        id: employees.employeeId,
+        title,
+        titleOfCourtesy,
+        birthDate,
+        hireDate,
+        address,
+        city,
+        postalCode,
+        country,
+        homePhone,
+        extension,
+        notes,
+        reportsTo,
+        id: employeeId,
       })
       .from(employees)
       .where(eq(employees.employeeId, id));

@@ -6,13 +6,11 @@ import { SupplierDetails, SupplierModel } from "src/models/suppliers";
 
 class SuppliersService {
   getAll = async (): Promise<GetAllDto<SupplierModel>> => {
-    const response = await suppliersRepository.getAll();
-    const { details, data: suppliers } = response;
+    const { details, data: suppliers } = await suppliersRepository.getAll();
     return new GetAllDto(suppliers, [details]);
   };
   getById = async (id: number): Promise<GetOneDto<SupplierDetails>> => {
-    const response = await suppliersRepository.getById(id);
-    const { details, data: supplier } = response;
+    const { details, data: supplier } = await suppliersRepository.getById(id);
     if (!supplier) {
       throw ServicesError.SupplierNotFound(id);
     }

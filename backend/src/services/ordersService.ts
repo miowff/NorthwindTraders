@@ -7,22 +7,17 @@ import { GetOneDto } from "src/models/response/response";
 
 class OrdersService {
   getAll = async (): Promise<GetAllDto<OrderModel>> => {
-    const response = await ordersRepository.getAll();
-    const { details, data: allOrders } = response;
+    const { details, data: allOrders } = await ordersRepository.getAll();
     return new GetAllDto(allOrders, [details]);
   };
   getById = async (id: number): Promise<GetOneDto<OrderDetails>> => {
-    const orderByIdResponse = await ordersRepository.getById(id);
-    const { details: orderByIdDetails, data: order } = orderByIdResponse;
+    const { details: orderByIdDetails, data: order } =
+      await ordersRepository.getById(id);
     if (!order.customerId) {
       throw ServicesError.OrderNotFound(id);
     }
-    const productsInOrderResponse = await productsRepository.productsInOrder(
-      id
-    );
-
     const { details: productsInOrderDetails, data: productsInOrder } =
-      productsInOrderResponse;
+      await productsRepository.productsInOrder(id);
     const orderInfo: OrderDetails = Object.assign(
       { productsInOrder: productsInOrder },
       order

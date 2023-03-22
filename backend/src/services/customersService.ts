@@ -10,13 +10,11 @@ import { GetAllDto } from "src/models/response/getAllResponse";
 
 class CustomersService {
   getAll = async (): Promise<GetAllDto<CustomerModel>> => {
-    const response = await customersRepository.getAll();
-    const { details, data: allCustomers } = response;
+    const { details, data: allCustomers } = await customersRepository.getAll();
     return new GetAllDto(allCustomers, [details]);
   };
   getById = async (id: string): Promise<GetOneDto<CustomerDetails>> => {
-    const response = await customersRepository.getById(id);
-    const { details, data: customer } = response;
+    const { details, data: customer } = await customersRepository.getById(id);
     if (!customer) {
       throw ServicesError.CustomerNotFound(id);
     }
@@ -25,8 +23,9 @@ class CustomersService {
   find = async (
     searchString: string
   ): Promise<GetAllDto<SearchResultCustomer>> => {
-    const response = await customersRepository.find(searchString);
-    const { details, data: suitableCustomers } = response;
+    const { details, data: suitableCustomers } = await customersRepository.find(
+      searchString
+    );
     return new GetAllDto(suitableCustomers, [details]);
   };
 }
